@@ -24,7 +24,7 @@ const Navigation = () => {
             Home
           </Link>
           <Link
-            to="/"
+            to="/login"
             className="py-2 px-4  bg-indigo-500 text-white rounded-lg font-bold text-lg hover:text-indigo-400 transition duration-300"
           >
             Log In
