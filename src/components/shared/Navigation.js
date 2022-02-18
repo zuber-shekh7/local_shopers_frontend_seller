@@ -55,6 +55,12 @@ const Navigation = () => {
               >
                 Log In
               </Link>
+              <Link
+                to="/signup"
+                className="py-2 px-4  bg-indigo-500 text-white rounded-lg font-bold text-lg hover:text-indigo-400 transition duration-300"
+              >
+                Sign Up
+              </Link>
             </>
           )}
         </div>

@@ -5,6 +5,9 @@ import {
   SELLER_LOGOUT_FAIL,
   SELLER_LOGOUT_REQUEST,
   SELLER_LOGOUT_SUCCESS,
+  SELLER_SIGNUP_FAIL,
+  SELLER_SIGNUP_REQUEST,
+  SELLER_SIGNUP_SUCCESS,
 } from "../constants/seller";
 
 const sellerLoginReducer = (state = {}, action) => {
@@ -26,4 +29,16 @@ const sellerLoginReducer = (state = {}, action) => {
   }
 };
 
-export { sellerLoginReducer };
+const sellerSignupReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SELLER_SIGNUP_REQUEST:
+      return { ...state, loading: true };
+    case SELLER_SIGNUP_SUCCESS:
+      return { ...state, loading: false, seller: action.payload };
+    case SELLER_SIGNUP_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+export { sellerLoginReducer, sellerSignupReducer };

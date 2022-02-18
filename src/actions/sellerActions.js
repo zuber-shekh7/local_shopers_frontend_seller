@@ -6,6 +6,9 @@ import {
   SELLER_LOGOUT_FAIL,
   SELLER_LOGOUT_REQUEST,
   SELLER_LOGOUT_SUCCESS,
+  SELLER_SIGNUP_FAIL,
+  SELLER_SIGNUP_REQUEST,
+  SELLER_SIGNUP_SUCCESS,
 } from "../constants/seller";
 
 const sellerLogin = (email, password) => async (dispatch) => {
@@ -29,6 +32,28 @@ const sellerLogin = (email, password) => async (dispatch) => {
   }
 };
 
+const sellerSignup =
+  (email, password, firstName, lastName, mobile) => async (dispatch) => {
+    try {
+      dispatch({ type: SELLER_SIGNUP_REQUEST });
+
+      const { data } = await backendAPI.post("/sellers/signup", {
+        email,
+        password,
+        firstName,
+        lastName,
+        mobile,
+      });
+
+      dispatch(sellerLogin(email, password));
+
+      dispatch({ type: SELLER_SIGNUP_SUCCESS, payload: data });
+    } catch (err) {
+      const error = err.response ? err.response.data.message : err.message;
+      dispatch({ type: SELLER_SIGNUP_FAIL, payload: error });
+    }
+  };
+
 const sellerLogout = () => async (dispatch) => {
   try {
     dispatch({ type: SELLER_LOGOUT_REQUEST });
@@ -42,4 +67,4 @@ const sellerLogout = () => async (dispatch) => {
   }
 };
 
-export { sellerLogin, sellerLogout };
+export { sellerLogin, sellerSignup, sellerLogout };
