@@ -3,7 +3,7 @@ import LoginImage from "../../assets/images/login.svg";
 
 const LoginPage = () => {
   return (
-    <main>
+    <main className="min-h-screen">
       <section className="max-w-7xl mx-auto mt-10 p-10">
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="bg-gray-100 rounded-xl shadow-lg p-10">

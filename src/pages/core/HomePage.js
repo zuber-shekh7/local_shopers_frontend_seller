@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <main>
+    <main className="min-h-screen">
       <section>
         <div className="grid-span-1 p-20 space-y-4 mx-auto text-center">
           <h1 className="text-indigo-500 text-5xl md:text-7xl lg:text-9xl font-extrabold">
