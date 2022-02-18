@@ -1,11 +1,19 @@
 import { combineReducers } from "redux";
+import { sellerLoginReducer } from "./sellerReducers";
 
-const initialState = {};
+const initialState = {
+  sellerLogin: {
+    seller: localStorage.getItem("seller")
+      ? JSON.parse(localStorage.getItem("seller", null))
+      : null,
+    token: localStorage.getItem("token")
+      ? JSON.parse(localStorage.getItem("token", null))
+      : null,
+  },
+};
 
 const rootReducer = combineReducers({
-  helloWorld: () => {
-    return "Hello world";
-  },
+  sellerLogin: sellerLoginReducer,
 });
 
 export default rootReducer;
