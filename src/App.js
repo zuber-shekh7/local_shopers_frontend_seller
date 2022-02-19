@@ -4,6 +4,7 @@ import Footer from "./components/shared/Footer";
 import Navigation from "./components/shared/Navigation";
 import ProtectedRoute from "./components/shared/Routes/ProtectedRoute";
 import HomePage from "./pages/core/HomePage";
+import NotFoundPage from "./pages/core/NotFoundPage";
 import DashboardPage from "./pages/seller/DashboardPage";
 import LoginPage from "./pages/seller/LoginPage";
 import SignupPage from "./pages/seller/SignupPage";
@@ -26,6 +27,8 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        {/* not found */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </Router>
