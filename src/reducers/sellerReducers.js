@@ -1,4 +1,7 @@
 import {
+  GET_SELLER_FAIL,
+  GET_SELLER_REQUEST,
+  GET_SELLER_SUCCESS,
   SELLER_LOGIN_FAIL,
   SELLER_LOGIN_REQUEST,
   SELLER_LOGIN_SUCCESS,
@@ -41,4 +44,18 @@ const sellerSignupReducer = (state = {}, action) => {
       return state;
   }
 };
-export { sellerLoginReducer, sellerSignupReducer };
+
+const getSellerReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GET_SELLER_REQUEST:
+      return { ...state, loading: true };
+    case GET_SELLER_SUCCESS:
+      return { ...state, loading: false, seller: action.payload };
+    case GET_SELLER_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export { sellerLoginReducer, sellerSignupReducer, getSellerReducer };

@@ -1,5 +1,8 @@
 import backendAPI from "../apis/backendAPI";
 import {
+  GET_SELLER_FAIL,
+  GET_SELLER_REQUEST,
+  GET_SELLER_SUCCESS,
   SELLER_LOGIN_FAIL,
   SELLER_LOGIN_REQUEST,
   SELLER_LOGIN_SUCCESS,
@@ -67,4 +70,25 @@ const sellerLogout = () => async (dispatch) => {
   }
 };
 
-export { sellerLogin, sellerSignup, sellerLogout };
+const getSeller = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_SELLER_REQUEST });
+
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    const { data } = await backendAPI.get(`/sellers/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    const { seller } = data;
+
+    dispatch({ type: GET_SELLER_SUCCESS, payload: seller });
+  } catch (err) {
+    const error = err.response ? err.response.data.message : err.message;
+    dispatch({ type: GET_SELLER_FAIL, payload: error });
+  }
+};
+
+export { sellerLogin, sellerSignup, sellerLogout, getSeller };
