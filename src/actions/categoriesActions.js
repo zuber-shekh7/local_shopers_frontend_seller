@@ -4,6 +4,9 @@ import {
   CREATE_CATEGORY_FAIL,
   CREATE_CATEGORY_REQUEST,
   CREATE_CATEGORY_SUCCESS,
+  EDIT_CATEGORY_FAIL,
+  EDIT_CATEGORY_REQUEST,
+  EDIT_CATEGORY_SUCCESS,
   GET_CATEGORIES_FAIL,
   GET_CATEGORIES_REQUEST,
   GET_CATEGORIES_SUCCESS,
@@ -74,4 +77,30 @@ const getCategory = (id) => async (dispatch) => {
   }
 };
 
-export { getCategories, createCategory, getCategory };
+const editCategory = (formData, category_id) => async (dispatch) => {
+  try {
+    dispatch({ type: EDIT_CATEGORY_REQUEST });
+
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    const { data } = await backendAPI.put(
+      `/categories/${category_id}`,
+      formData,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    const { category } = data;
+
+    dispatch({ type: EDIT_CATEGORY_SUCCESS, payload: category });
+
+    dispatch({ type: EDIT_CATEGORY_SUCCESS, payload: null });
+  } catch (err) {
+    const error = err.response ? err.response.data.message : err.message;
+    dispatch({ type: EDIT_CATEGORY_FAIL, payload: error });
+  }
+};
+
+export { getCategories, createCategory, getCategory, editCategory };

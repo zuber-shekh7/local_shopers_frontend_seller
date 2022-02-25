@@ -2,6 +2,9 @@ import {
   CREATE_CATEGORY_FAIL,
   CREATE_CATEGORY_REQUEST,
   CREATE_CATEGORY_SUCCESS,
+  EDIT_CATEGORY_FAIL,
+  EDIT_CATEGORY_REQUEST,
+  EDIT_CATEGORY_SUCCESS,
   GET_CATEGORIES_FAIL,
   GET_CATEGORIES_REQUEST,
   GET_CATEGORIES_SUCCESS,
@@ -49,4 +52,22 @@ const getCategoryReducer = (state = {}, action) => {
   }
 };
 
-export { createCategoryReducer, getCategoriesReducer, getCategoryReducer };
+const editCategoryReducer = (state = {}, action) => {
+  switch (action.type) {
+    case EDIT_CATEGORY_REQUEST:
+      return { ...state, loading: true };
+    case EDIT_CATEGORY_SUCCESS:
+      return { ...state, loading: false, category: action.payload };
+    case EDIT_CATEGORY_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export {
+  createCategoryReducer,
+  getCategoriesReducer,
+  getCategoryReducer,
+  editCategoryReducer,
+};

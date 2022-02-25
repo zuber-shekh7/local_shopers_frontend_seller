@@ -8,6 +8,7 @@ import CreateBusinessPage from "./pages/business/CreateBusinessPage";
 import CategoriesPage from "./pages/categories/CategoriesPage";
 import CategoryPage from "./pages/categories/CategoryPage";
 import CreateCategoryPage from "./pages/categories/CreateCategoryPage";
+import EditCategoryPage from "./pages/categories/EditCategoryPage";
 import HomePage from "./pages/core/HomePage";
 import NotFoundPage from "./pages/core/NotFoundPage";
 import DashboardPage from "./pages/seller/DashboardPage";
@@ -73,6 +74,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <CategoryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={`${routes.getCategories}/:category_id/edit`}
+          element={
+            <ProtectedRoute>
+              <EditCategoryPage />
             </ProtectedRoute>
           }
         />

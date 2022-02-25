@@ -18,7 +18,7 @@ const CategoryPage = () => {
 
   return (
     <main>
-      <section className="m-10 px-10 max-w-xl mx-auto">
+      <section className="m-10 px-10 max-w-xl mx-auto min-h-screen">
         {category && (
           <div className="flex justify-center">
             <div className="flex-1 bg-gray-50 border-2 border-gray-50 px-10 py-5 rounded-lg shadow-lg">

@@ -3,6 +3,7 @@ import { getBusinessCategoriesReducer } from "./businessCategoryReducers";
 import { createBusinessReducer, getBusinessReducer } from "./businessReducers";
 import {
   createCategoryReducer,
+  editCategoryReducer,
   getCategoriesReducer,
   getCategoryReducer,
 } from "./categoriesReducers";
@@ -38,6 +39,7 @@ const initialState = {
   createCategory: { category: null },
   getCategories: { categories: null },
   getCategory: { category: null },
+  editCategory: { category: null },
 };
 
 const rootReducer = combineReducers({
@@ -50,6 +52,7 @@ const rootReducer = combineReducers({
   createCategory: createCategoryReducer,
   getCategories: getCategoriesReducer,
   getCategory: getCategoryReducer,
+  editCategory: editCategoryReducer,
 });
 
 export default rootReducer;
