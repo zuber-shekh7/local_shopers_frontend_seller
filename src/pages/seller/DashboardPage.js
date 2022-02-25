@@ -53,7 +53,10 @@ const DashboardPage = () => {
             <h1 className="text-4xl font-semibold mb-3">Your Account</h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-2">
               <div className="px-3 py-4 border-2 rounded-lg span-col-1 mb-3 hover:bg-gray-100">
-                <Link className="flex space-x-2" to={routes.getCategories}>
+                <Link
+                  className="flex space-x-2"
+                  to={`${routes.getBusiness}/${seller.business._id}`}
+                >
                   <div className="hidden md:block">
                     <HiOutlineHome className="h-8 w-8" />
                   </div>

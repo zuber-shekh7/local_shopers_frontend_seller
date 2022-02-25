@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/shared/Footer";
 import Navigation from "./components/shared/Navigation";
 import ProtectedRoute from "./components/shared/Routes/ProtectedRoute";
+import BusinessPage from "./pages/business/BusinessPage";
 import CreateBusinessPage from "./pages/business/CreateBusinessPage";
 import HomePage from "./pages/core/HomePage";
 import NotFoundPage from "./pages/core/NotFoundPage";
@@ -35,6 +36,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <CreateBusinessPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={`${routes.getBusiness}/:business_id`}
+          element={
+            <ProtectedRoute>
+              <BusinessPage />
             </ProtectedRoute>
           }
         />
