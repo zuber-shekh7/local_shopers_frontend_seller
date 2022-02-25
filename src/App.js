@@ -5,6 +5,7 @@ import Navigation from "./components/shared/Navigation";
 import ProtectedRoute from "./components/shared/Routes/ProtectedRoute";
 import BusinessPage from "./pages/business/BusinessPage";
 import CreateBusinessPage from "./pages/business/CreateBusinessPage";
+import CategoriesPage from "./pages/categories/CategoriesPage";
 import HomePage from "./pages/core/HomePage";
 import NotFoundPage from "./pages/core/NotFoundPage";
 import DashboardPage from "./pages/seller/DashboardPage";
@@ -44,6 +45,15 @@ const App = () => {
           element={
             <ProtectedRoute>
               <BusinessPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={routes.getCategories}
+          exact
+          element={
+            <ProtectedRoute>
+              <CategoriesPage />
             </ProtectedRoute>
           }
         />
