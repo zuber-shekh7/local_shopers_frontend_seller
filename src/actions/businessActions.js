@@ -36,6 +36,8 @@ const getBusiness = (id) => async (dispatch) => {
 
     const { business } = data;
 
+    localStorage.setItem("business", JSON.stringify(business));
+
     dispatch({ type: GET_BUSINESS_SUCCESS, payload: business });
   } catch (err) {
     const error = err.response ? err.response.data.message : err.message;
