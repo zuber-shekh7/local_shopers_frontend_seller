@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/shared/Routes/ProtectedRoute";
 import BusinessPage from "./pages/business/BusinessPage";
 import CreateBusinessPage from "./pages/business/CreateBusinessPage";
 import CategoriesPage from "./pages/categories/CategoriesPage";
+import CreateCategoryPage from "./pages/categories/CreateCategoryPage";
 import HomePage from "./pages/core/HomePage";
 import NotFoundPage from "./pages/core/NotFoundPage";
 import DashboardPage from "./pages/seller/DashboardPage";
@@ -54,6 +55,15 @@ const App = () => {
           element={
             <ProtectedRoute>
               <CategoriesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={routes.createCategory}
+          exact
+          element={
+            <ProtectedRoute>
+              <CreateCategoryPage />
             </ProtectedRoute>
           }
         />

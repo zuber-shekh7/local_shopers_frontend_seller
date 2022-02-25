@@ -23,7 +23,7 @@ const CategoriesPage = () => {
             <h1 className="text-4xl font-bold mb-4">Manage Categories</h1>
             <Link
               className="bg-indigo-500 text-white rounded-lg px-3 py-2"
-              to={routes.dashboard}
+              to={routes.createCategory}
             >
               Add category
             </Link>

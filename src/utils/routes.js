@@ -2,6 +2,7 @@ const routes = {
   dashboard: "/seller/account",
   getBusiness: "/seller/business",
   createBusiness: "/sellers/business/new",
+  createCategory: "/sellers/manage/categories/new",
   getCategories: "/sellers/manage/categories",
 };
 
