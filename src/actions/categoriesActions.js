@@ -4,6 +4,9 @@ import {
   CREATE_CATEGORY_FAIL,
   CREATE_CATEGORY_REQUEST,
   CREATE_CATEGORY_SUCCESS,
+  DELETE_CATEGORY_FAIL,
+  DELETE_CATEGORY_REQUEST,
+  DELETE_CATEGORY_SUCCESS,
   EDIT_CATEGORY_FAIL,
   EDIT_CATEGORY_REQUEST,
   EDIT_CATEGORY_SUCCESS,
@@ -103,4 +106,31 @@ const editCategory = (formData, category_id) => async (dispatch) => {
   }
 };
 
-export { getCategories, createCategory, getCategory, editCategory };
+const deleteCategory = (category_id) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_CATEGORY_REQUEST });
+
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    await backendAPI.delete(`/categories/${category_id}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    dispatch({ type: DELETE_CATEGORY_SUCCESS, payload: true });
+
+    dispatch({ type: DELETE_CATEGORY_SUCCESS, payload: null });
+  } catch (err) {
+    const error = err.response ? err.response.data.message : err.message;
+    dispatch({ type: DELETE_CATEGORY_FAIL, payload: error });
+  }
+};
+
+export {
+  getCategories,
+  createCategory,
+  getCategory,
+  editCategory,
+  deleteCategory,
+};
