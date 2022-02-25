@@ -4,6 +4,7 @@ import { createBusinessReducer, getBusinessReducer } from "./businessReducers";
 import {
   createCategoryReducer,
   getCategoriesReducer,
+  getCategoryReducer,
 } from "./categoriesReducers";
 import {
   getSellerReducer,
@@ -36,6 +37,7 @@ const initialState = {
   getBusiness: { business: null },
   createCategory: { category: null },
   getCategories: { categories: null },
+  getCategory: { category: null },
 };
 
 const rootReducer = combineReducers({
@@ -47,6 +49,7 @@ const rootReducer = combineReducers({
   getBusiness: getBusinessReducer,
   createCategory: createCategoryReducer,
   getCategories: getCategoriesReducer,
+  getCategory: getCategoryReducer,
 });
 
 export default rootReducer;

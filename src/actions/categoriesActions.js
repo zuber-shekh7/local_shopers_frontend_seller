@@ -7,6 +7,9 @@ import {
   GET_CATEGORIES_FAIL,
   GET_CATEGORIES_REQUEST,
   GET_CATEGORIES_SUCCESS,
+  GET_CATEGORY_FAIL,
+  GET_CATEGORY_REQUEST,
+  GET_CATEGORY_SUCCESS,
 } from "../constants/categories";
 
 const getCategories = (id) => async (dispatch) => {
@@ -57,4 +60,18 @@ const createCategory = (formData) => async (dispatch) => {
   }
 };
 
-export { getCategories, createCategory };
+const getCategory = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_CATEGORY_REQUEST });
+
+    const { data } = await backendAPI.get(`/categories/${id}`, {});
+    const { category } = data;
+
+    dispatch({ type: GET_CATEGORY_SUCCESS, payload: category });
+  } catch (err) {
+    const error = err.response ? err.response.data.message : err.message;
+    dispatch({ type: GET_CATEGORY_FAIL, payload: error });
+  }
+};
+
+export { getCategories, createCategory, getCategory };
