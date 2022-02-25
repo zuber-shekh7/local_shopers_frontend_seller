@@ -1,4 +1,6 @@
 import { combineReducers } from "redux";
+import { getBusinessCategoriesReducer } from "./businessCategoryReducers";
+import { createBusinessReducer } from "./businessReducers";
 import {
   getSellerReducer,
   sellerLoginReducer,
@@ -25,12 +27,16 @@ const initialState = {
   getSeller: {
     seller: null,
   },
+  getBusinessCategories: { categories: null },
+  createBusiness: { business: null },
 };
 
 const rootReducer = combineReducers({
   sellerLogin: sellerLoginReducer,
   sellerSignup: sellerSignupReducer,
   getSeller: getSellerReducer,
+  getBusinessCategories: getBusinessCategoriesReducer,
+  createBusiness: createBusinessReducer,
 });
 
 export default rootReducer;

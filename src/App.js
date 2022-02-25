@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/shared/Footer";
 import Navigation from "./components/shared/Navigation";
 import ProtectedRoute from "./components/shared/Routes/ProtectedRoute";
+import CreateBusinessPage from "./pages/business/CreateBusinessPage";
 import HomePage from "./pages/core/HomePage";
 import NotFoundPage from "./pages/core/NotFoundPage";
 import DashboardPage from "./pages/seller/DashboardPage";
 import LoginPage from "./pages/seller/LoginPage";
 import SignupPage from "./pages/seller/SignupPage";
+import routes from "./utils/routes";
 
 const App = () => {
   return (
@@ -24,6 +26,15 @@ const App = () => {
           element={
             <ProtectedRoute>
               <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          exact
+          path={routes.createBusiness}
+          element={
+            <ProtectedRoute>
+              <CreateBusinessPage />
             </ProtectedRoute>
           }
         />
