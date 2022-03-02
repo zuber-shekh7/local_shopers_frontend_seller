@@ -34,6 +34,10 @@
   main {
     @apply min-h-screen;
   }
+
+  hr {
+    @apply mb-3;
+  }
 }
 
 @layer components {

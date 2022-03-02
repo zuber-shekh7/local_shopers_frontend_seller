@@ -24,13 +24,14 @@ const DashboardPage = () => {
   }, [_id, dispatch]);
 
   return (
-    <main className="h-screen">
-      <section className="m-10 px-10 max-w-6xl mx-auto">
+    <main>
+      <section className="container">
         {seller && (
           <>
             {seller.business ? (
               <>
-                <h1 className="text-4xl font-semibold mb-3">Your Account</h1>
+                <h1>Your Account</h1>
+                <hr />
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-2">
                   <div className="px-3 py-4 border-2 rounded-lg span-col-1 mb-3 hover:bg-gray-100">
                     <Link
@@ -41,10 +42,10 @@ const DashboardPage = () => {
                         <HiOutlineHome className="h-8 w-8" />
                       </div>
                       <div>
-                        <h4 className="text-2xl font-medium">
-                          Manage Business
-                        </h4>
-                        <h6>Create, Edit, and Delete your categories</h6>
+                        <h4>Manage Business</h4>
+                        <h6 className="text-gray-900">
+                          Create, Edit, and Delete your categories
+                        </h6>
                       </div>
                     </Link>
                   </div>
@@ -54,8 +55,10 @@ const DashboardPage = () => {
                         <HiOutlineTruck className="h-8 w-8" />
                       </div>
                       <div>
-                        <h4 className="text-2xl font-medium">Manage Orders</h4>
-                        <h6>Create, Edit, and Delete your categories</h6>
+                        <h4>Manage Orders</h4>
+                        <h6 className="text-gray-900">
+                          Create, Edit, and Delete your categories
+                        </h6>
                       </div>
                     </Link>
                   </div>
@@ -65,10 +68,10 @@ const DashboardPage = () => {
                         <HiOutlineFolderOpen className="h-8 w-8" />
                       </div>
                       <div>
-                        <h4 className="text-2xl font-medium">
-                          Manage Categories
-                        </h4>
-                        <h6>Create, Edit, and Delete your categories</h6>
+                        <h4>Manage Categories</h4>
+                        <h6 className="text-gray-900">
+                          Create, Edit, and Delete your categories
+                        </h6>
                       </div>
                     </Link>
                   </div>
@@ -78,10 +81,10 @@ const DashboardPage = () => {
                         <HiOutlineFolderOpen className="h-8 w-8" />
                       </div>
                       <div>
-                        <h4 className="text-2xl font-medium">
-                          Manage Products
-                        </h4>
-                        <h6>Create, Edit, and Delete your categories</h6>
+                        <h4>Manage Products</h4>
+                        <h6 className="text-gray-900">
+                          Create, Edit, and Delete your categories
+                        </h6>
                       </div>
                     </Link>
                   </div>
