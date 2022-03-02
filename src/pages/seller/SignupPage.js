@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { sellerSignup } from "../../actions/sellerActions";
-import LoginImage from "../../assets/images/login.svg";
+import routes from "../../utils/routes";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
@@ -40,46 +40,43 @@ const SignupPage = () => {
   };
 
   return (
-    <main className="min-h-screen">
-      <section className="max-w-7xl mx-auto mt-10 p-10">
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="bg-gray-100 rounded-xl shadow-lg p-10">
-            <h2 className="text-4xl font-bold text-center mb-5">Sign Up</h2>
+    <main className="bg-indigo-400">
+      <section className="container mt-0">
+        <div className="flex justify-center py-5">
+          <div className="w-96 bg-indigo-600 rounded-xl shadow-lg p-5">
+            <h2 className="text-white text-center">Sign Up</h2>
             <form onSubmit={handleSubmit}>
-              <div className="mb-5">
-                <label className="block" htmlFor="firstName">
-                  First Name
-                </label>
-                <input
-                  className="text-lg w-full py-2 px-2 border-2 rounded-lg border-gray"
-                  type="text"
-                  id="firstName"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="Steve"
-                  required
-                />
+              <div className="grid grid-cols-12 sm:grid-cols-12 gap-x-2">
+                <div className="mb-5 col-span-6 sm:col-span-12">
+                  <label htmlFor="firstName">First Name</label>
+                  <input
+                    className="w-full py-2 px-2 rounded-lg focus:ring-1 focus:ring-white "
+                    type="text"
+                    id="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="Steve"
+                    required
+                  />
+                </div>
+                <div className="mb-5 col-span-6 sm:col-span-12 ">
+                  <label htmlFor="lastName">Last Name</label>
+                  <input
+                    className="w-full py-2 px-2 rounded-lg focus:ring-1 focus:ring-white "
+                    type="text"
+                    id="lastName"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    placeholder="Jobs"
+                    required
+                  />
+                </div>
               </div>
+
               <div className="mb-5">
-                <label className="block" htmlFor="lastName">
-                  Last Name
-                </label>
+                <label htmlFor="mobile">Mobile</label>
                 <input
-                  className="text-lg w-full py-2 px-2 border-2 rounded-lg border-gray"
-                  type="text"
-                  id="lastName"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Jobs"
-                  required
-                />
-              </div>
-              <div className="mb-5">
-                <label className="block" htmlFor="mobile">
-                  Mobile
-                </label>
-                <input
-                  className="text-lg w-full py-2 px-2 border-2 rounded-lg border-gray"
+                  className="w-full py-2 px-2 rounded-lg focus:ring-1 focus:ring-white "
                   type="text"
                   id="mobile"
                   value={mobile}
@@ -89,11 +86,9 @@ const SignupPage = () => {
                 />
               </div>
               <div className="mb-5">
-                <label className="block" htmlFor="email">
-                  Email
-                </label>
+                <label htmlFor="email">Email</label>
                 <input
-                  className="text-lg w-full py-2 px-2 border-2 rounded-lg border-gray"
+                  className="w-full py-2 px-2 rounded-lg focus:ring-1 focus:ring-white "
                   type="email"
                   id="email"
                   value={email}
@@ -103,11 +98,9 @@ const SignupPage = () => {
                 />
               </div>
               <div className="mb-5">
-                <label className="block" htmlFor="password">
-                  Password
-                </label>
+                <label htmlFor="password">Password</label>
                 <input
-                  className="text-lg w-full py-2 px-2 border-2 rounded-lg border-gray"
+                  className="w-full py-2 px-2 rounded-lg focus:ring-1 focus:ring-white "
                   type="password"
                   id="password"
                   value={password}
@@ -117,11 +110,9 @@ const SignupPage = () => {
                 />
               </div>
               <div className="mb-5">
-                <label className="block" htmlFor="confirmPassword">
-                  Confirm Password
-                </label>
+                <label htmlFor="confirmPassword">Confirm Password</label>
                 <input
-                  className="text-lg w-full py-2 px-2 border-2 rounded-lg border-gray"
+                  className="w-full py-2 px-2 rounded-lg focus:ring-1 focus:ring-white "
                   type="password"
                   id="confirmPassword"
                   value={confirmPassword}
@@ -132,31 +123,21 @@ const SignupPage = () => {
               </div>
               <div className="mb-5">
                 <button
-                  className="w-full py-2 text-lg bg-indigo-500 rounded-lg text-white"
+                  className="btn text-base bg-indigo-600 w-full border border-white hover:bg-indigo-700"
                   type="submit"
                 >
                   Sign Up
                 </button>
               </div>
-              {error && (
-                <div className="mb-5 text-center">
-                  <p className="text-red-500">{error}</p>
-                </div>
-              )}
-              {message && (
-                <div className="mb-5 text-center">
-                  <p className="text-red-500">{message}</p>
-                </div>
-              )}
-              {loading && (
-                <div className="mb-5 text-center">
-                  <p>Loading...</p>
-                </div>
-              )}
+              <div className="mb-5">
+                <p className="text-center text-white">
+                  Already have an account?{" "}
+                  <Link className="underline" to={routes.login}>
+                    Login
+                  </Link>
+                </p>
+              </div>
             </form>
-          </div>
-          <div className="hidden md:flex justify-center items-center">
-            <img className="h-72 w-auto" src={LoginImage} alt="login" />
           </div>
         </div>
       </section>

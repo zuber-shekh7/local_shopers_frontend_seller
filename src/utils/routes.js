@@ -1,5 +1,6 @@
 const routes = {
   signup: "/signup",
+  login: "/login",
   dashboard: "/seller/account",
   getBusiness: "/seller/business",
   createBusiness: "/sellers/business/new",
