@@ -32,7 +32,7 @@ const LoginPage = () => {
   return (
     <main className="bg-indigo-400">
       <section className="container mt-0">
-        <div className="flex justify-center pt-10 ">
+        <div className="flex justify-center py-5 ">
           <div className="w-96 bg-indigo-600 rounded-xl shadow-lg p-5">
             <h2 className="text-center text-white">Login</h2>
             <form onSubmit={handleSubmit}>
