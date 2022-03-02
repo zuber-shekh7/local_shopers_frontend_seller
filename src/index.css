@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-4xl font-semibold mb-3;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold mb-3;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold mb-3;
+  }
+
+  h4 {
+    @apply text-xl font-semibold mb-3;
+  }
+
+  h5 {
+    @apply text-lg font-semibold mb-3;
+  }
+
+  h6 {
+    @apply text-base font-semibold mb-3;
+  }
+
+  p {
+    @apply text-lg mb-3;
+  }
+
+  main {
+    @apply min-h-screen;
+  }
+}
+
+@layer components {
+  .display-1 {
+    @apply text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold;
+  }
+  .container {
+    @apply m-5 px-2  w-full mx-auto;
+  }
+  .btn {
+    @apply py-2 px-4 text-xl hover:bg-indigo-600 bg-indigo-500 rounded-lg text-white shadow-lg;
+  }
+}
