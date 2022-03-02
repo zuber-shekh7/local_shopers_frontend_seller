@@ -1,4 +1,6 @@
 const routes = {
+  home: "/",
+  about: "/about",
   signup: "/signup",
   login: "/login",
   dashboard: "/seller/account",
