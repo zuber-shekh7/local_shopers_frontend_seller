@@ -1,8 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import routes from "../../utils/routes";
 
 const HomePage = () => {
+  const { seller } = useSelector((state) => state.sellerLogin);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (seller) {
+      return navigate(routes.dashboard);
+    }
+  }, [seller, navigate]);
+
   return (
     <main>
       <section className="container">
