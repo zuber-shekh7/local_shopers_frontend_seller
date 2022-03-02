@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { HiOutlineArrowSmLeft, HiOutlinePencil } from "react-icons/hi";
 import { getBusiness } from "../../actions/businessActions";
 import routes from "../../utils/routes";
+import Breadcrumb from "../../components/shared/Breadcrumb";
 
 const BusinessPage = () => {
   const { business_id } = useParams();
@@ -21,6 +22,20 @@ const BusinessPage = () => {
   return (
     <main>
       <section className="m-10 px-10 max-w-xl mx-auto">
+        <Breadcrumb
+          links={[
+            {
+              name: "your account",
+              to: routes.dashboard,
+            },
+            {
+              name: "your business",
+              to: business
+                ? `${routes.getBusiness}/${business._id}`
+                : routes.dashboard,
+            },
+          ]}
+        />
         {business && (
           <div className="flex justify-center">
             <div className="flex-1 bg-gray-50 border-2 border-gray-50 px-10 py-5 rounded-lg shadow-lg">
