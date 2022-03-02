@@ -38,6 +38,10 @@
   hr {
     @apply mb-3;
   }
+
+  label {
+    @apply text-white block;
+  }
 }
 
 @layer components {

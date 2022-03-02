@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { sellerLogin } from "../../actions/sellerActions";
-import LoginImage from "../../assets/images/login.svg";
+import routes from "../../utils/routes";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -30,18 +30,16 @@ const LoginPage = () => {
   };
 
   return (
-    <main className="min-h-screen">
-      <section className="max-w-7xl mx-auto mt-10 p-10">
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="bg-gray-100 rounded-xl shadow-lg p-10">
-            <h2 className="text-4xl font-bold text-center mb-5">Login</h2>
+    <main className="bg-indigo-400">
+      <section className="container mt-0">
+        <div className="flex justify-center pt-10 ">
+          <div className="w-96 bg-indigo-600 rounded-xl shadow-lg p-5">
+            <h2 className="text-center text-white">Login</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-5">
-                <label className="block" htmlFor="email">
-                  Email
-                </label>
+                <label htmlFor="email">Email</label>
                 <input
-                  className="text-lg w-full py-2 px-2 border-2 rounded-lg border-gray"
+                  className="w-full py-2 px-2 rounded-lg focus:ring-1 focus:ring-white "
                   type="email"
                   id="email"
                   value={email}
@@ -51,11 +49,9 @@ const LoginPage = () => {
                 />
               </div>
               <div className="mb-5">
-                <label className="block" htmlFor="password">
-                  Password
-                </label>
+                <label htmlFor="password">Password</label>
                 <input
-                  className="text-lg w-full py-2 px-2 border-2 rounded-lg border-gray"
+                  className="w-full py-2 px-2 rounded-lg focus:ring-1 focus:ring-white "
                   type="password"
                   id="password"
                   value={password}
@@ -66,26 +62,21 @@ const LoginPage = () => {
               </div>
               <div className="mb-5">
                 <button
-                  className="w-full py-2 text-lg bg-indigo-500 rounded-lg text-white"
+                  className="btn text-base bg-indigo-600 w-full border border-white hover:bg-indigo-700"
                   type="submit"
                 >
                   Log In
                 </button>
               </div>
-              {error && (
-                <div className="mb-5 text-center">
-                  <p className="text-red-500">{error}</p>
-                </div>
-              )}
-              {loading && (
-                <div className="mb-5 text-center">
-                  <p>Loading...</p>
-                </div>
-              )}
+              <div className="mb-5">
+                <p className="text-center text-white">
+                  Don't have an account?{" "}
+                  <Link className="underline" to={routes.signup}>
+                    Signup
+                  </Link>
+                </p>
+              </div>
             </form>
-          </div>
-          <div className="hidden md:flex justify-center items-center">
-            <img className="h-72 w-auto" src={LoginImage} alt="login" />
           </div>
         </div>
       </section>
