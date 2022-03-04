@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Footer from "./components/shared/Footer";
-import Navigation from "./components/shared/Navigation";
+import DefaultContainer from "./components/shared/containers/DefaultContainer";
+import LoginContainer from "./components/shared/containers/LoginContainer";
 import ProtectedRoute from "./components/shared/Routes/ProtectedRoute";
 import BusinessPage from "./pages/business/BusinessPage";
 import CreateBusinessPage from "./pages/business/CreateBusinessPage";
@@ -19,76 +19,78 @@ import routes from "./utils/routes";
 const App = () => {
   return (
     <Router>
-      <Navigation />
       <Routes>
-        <Route path="/" element={<HomePage />} exact />
-        <Route path="/login" element={<LoginPage />} exact />
-        <Route path="/signup" element={<SignupPage />} exact />
+        <Route element={<DefaultContainer />}>
+          <Route path="/" element={<HomePage />} exact />
+          <Route
+            exact
+            path="/seller/account"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path={routes.createBusiness}
+            element={
+              <ProtectedRoute>
+                <CreateBusinessPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={`${routes.getBusiness}/:business_id`}
+            element={
+              <ProtectedRoute>
+                <BusinessPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={routes.getCategories}
+            exact
+            element={
+              <ProtectedRoute>
+                <CategoriesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={routes.createCategory}
+            exact
+            element={
+              <ProtectedRoute>
+                <CreateCategoryPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={`${routes.getCategories}/:category_id`}
+            element={
+              <ProtectedRoute>
+                <CategoryPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={`${routes.getCategories}/:category_id/edit`}
+            element={
+              <ProtectedRoute>
+                <EditCategoryPage />
+              </ProtectedRoute>
+            }
+          />
+          {/* not found */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
 
-        <Route
-          exact
-          path="/seller/account"
-          element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          exact
-          path={routes.createBusiness}
-          element={
-            <ProtectedRoute>
-              <CreateBusinessPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={`${routes.getBusiness}/:business_id`}
-          element={
-            <ProtectedRoute>
-              <BusinessPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={routes.getCategories}
-          exact
-          element={
-            <ProtectedRoute>
-              <CategoriesPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={routes.createCategory}
-          exact
-          element={
-            <ProtectedRoute>
-              <CreateCategoryPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={`${routes.getCategories}/:category_id`}
-          element={
-            <ProtectedRoute>
-              <CategoryPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={`${routes.getCategories}/:category_id/edit`}
-          element={
-            <ProtectedRoute>
-              <EditCategoryPage />
-            </ProtectedRoute>
-          }
-        />
-        {/* not found */}
-        <Route path="*" element={<NotFoundPage />} />
+        <Route element={<LoginContainer />}>
+          <Route path="/login" exact element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} exact />
+        </Route>
       </Routes>
-      <Footer />
     </Router>
   );
 };
