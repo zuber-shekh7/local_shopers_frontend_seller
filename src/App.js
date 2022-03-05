@@ -11,6 +11,7 @@ import CreateCategoryPage from "./pages/categories/CreateCategoryPage";
 import EditCategoryPage from "./pages/categories/EditCategoryPage";
 import HomePage from "./pages/core/HomePage";
 import NotFoundPage from "./pages/core/NotFoundPage";
+import OrderPage from "./pages/orders/OrderPage";
 import OrdersPage from "./pages/orders/OrdersPage";
 import DashboardPage from "./pages/seller/DashboardPage";
 import LoginPage from "./pages/seller/LoginPage";
@@ -89,6 +90,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <OrdersPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={`${routes.getOrders}/:order_id`}
+            element={
+              <ProtectedRoute>
+                <OrderPage />
               </ProtectedRoute>
             }
           />
