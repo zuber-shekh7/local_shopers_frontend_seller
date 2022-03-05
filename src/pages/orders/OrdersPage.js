@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOrders } from "../../actions/orderActions";
+import Breadcrumb from "../../components/shared/Breadcrumb";
 import routes from "../../utils/routes";
 
 const OrdersPage = () => {
@@ -20,6 +21,18 @@ const OrdersPage = () => {
   return (
     <main>
       <section className="container">
+        <Breadcrumb
+          links={[
+            {
+              name: "your account",
+              to: routes.dashboard,
+            },
+            {
+              name: "your orders",
+              to: routes.getOrders,
+            },
+          ]}
+        />
         <h1>Your Orders</h1>
         <hr />
         {loading && !orders && (
@@ -29,7 +42,10 @@ const OrdersPage = () => {
                 .fill(1)
                 .map((value, index) => {
                   return (
-                    <div className="bg-gray-50 border-2 rounded-lg px-4 py-4 shadow-lg hover:bg-gray-100">
+                    <div
+                      key={index}
+                      className="bg-gray-50 border-2 rounded-lg px-4 py-4 shadow-lg hover:bg-gray-100"
+                    >
                       <div className="h-4 bg-gray-300 rounded-lg mb-3"></div>
                       <hr />
                       <div className="h-6 w-6/12 bg-gray-300 rounded-lg mb-3"></div>
