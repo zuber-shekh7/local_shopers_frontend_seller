@@ -50,7 +50,7 @@ const DashboardPage = () => {
                     </Link>
                   </div>
                   <div className="px-3 py-4 border-2 rounded-lg span-col-1 mb-3 hover:bg-gray-100">
-                    <Link className="flex space-x-2" to={routes.getCategories}>
+                    <Link className="flex space-x-2" to={routes.getOrders}>
                       <div className="hidden md:block">
                         <HiOutlineTruck className="h-8 w-8" />
                       </div>

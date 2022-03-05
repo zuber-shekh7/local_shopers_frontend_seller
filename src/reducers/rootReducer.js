@@ -8,6 +8,7 @@ import {
   getCategoriesReducer,
   getCategoryReducer,
 } from "./categoriesReducers";
+import { getOrdersReducer } from "./orderReducers";
 import {
   getSellerReducer,
   sellerLoginReducer,
@@ -42,6 +43,7 @@ const initialState = {
   getCategory: { category: null },
   editCategory: { category: null },
   deleteCategory: { success: null },
+  getOrders: { orders: null },
 };
 
 const rootReducer = combineReducers({
@@ -56,6 +58,7 @@ const rootReducer = combineReducers({
   getCategory: getCategoryReducer,
   editCategory: editCategoryReducer,
   deleteCategory: deleteCategoryReducer,
+  getOrders: getOrdersReducer,
 });
 
 export default rootReducer;

@@ -8,6 +8,7 @@ const routes = {
   createBusiness: "/sellers/business/new",
   createCategory: "/sellers/manage/categories/new",
   getCategories: "/sellers/manage/categories",
+  getOrders: "/sellers/orders",
 };
 
 export default routes;

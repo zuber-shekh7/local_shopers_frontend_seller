@@ -11,6 +11,7 @@ import CreateCategoryPage from "./pages/categories/CreateCategoryPage";
 import EditCategoryPage from "./pages/categories/EditCategoryPage";
 import HomePage from "./pages/core/HomePage";
 import NotFoundPage from "./pages/core/NotFoundPage";
+import OrdersPage from "./pages/orders/OrdersPage";
 import DashboardPage from "./pages/seller/DashboardPage";
 import LoginPage from "./pages/seller/LoginPage";
 import SignupPage from "./pages/seller/SignupPage";
@@ -79,6 +80,15 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <EditCategoryPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={routes.getOrders}
+            exact
+            element={
+              <ProtectedRoute>
+                <OrdersPage />
               </ProtectedRoute>
             }
           />
