@@ -38,12 +38,12 @@ const DashboardPage = () => {
                       className="flex space-x-2"
                       to={`${routes.getBusiness}/${seller.business._id}`}
                     >
-                      <div className="hidden md:block">
+                      <div>
                         <HiOutlineHome className="h-8 w-8" />
                       </div>
                       <div>
-                        <h4>Manage Business</h4>
-                        <h6 className="text-gray-900">
+                        <h2>Manage Business</h2>
+                        <h6 className="text-gray-600">
                           Create, Edit, and Delete your categories
                         </h6>
                       </div>
@@ -51,12 +51,12 @@ const DashboardPage = () => {
                   </div>
                   <div className="px-3 py-4 border-2 rounded-lg span-col-1 mb-3 hover:bg-gray-100">
                     <Link className="flex space-x-2" to={routes.getOrders}>
-                      <div className="hidden md:block">
+                      <div>
                         <HiOutlineTruck className="h-8 w-8" />
                       </div>
                       <div>
-                        <h4>Manage Orders</h4>
-                        <h6 className="text-gray-900">
+                        <h2>Manage Orders</h2>
+                        <h6 className="text-gray-600">
                           Create, Edit, and Delete your categories
                         </h6>
                       </div>
@@ -64,12 +64,12 @@ const DashboardPage = () => {
                   </div>
                   <div className="px-3 py-4 border-2 rounded-lg span-col-1 mb-3 hover:bg-gray-100">
                     <Link className="flex space-x-2" to={routes.getCategories}>
-                      <div className="hidden md:block">
+                      <div>
                         <HiOutlineFolderOpen className="h-8 w-8" />
                       </div>
                       <div>
-                        <h4>Manage Categories</h4>
-                        <h6 className="text-gray-900">
+                        <h2>Manage Categories</h2>
+                        <h6 className="text-gray-600">
                           Create, Edit, and Delete your categories
                         </h6>
                       </div>
@@ -77,12 +77,12 @@ const DashboardPage = () => {
                   </div>
                   <div className="px-3 py-4 border-2 rounded-lg span-col-1 mb-3 hover:bg-gray-100">
                     <Link className="flex space-x-2" to={routes.getCategories}>
-                      <div className="hidden md:block">
+                      <div>
                         <HiOutlineFolderOpen className="h-8 w-8" />
                       </div>
                       <div>
-                        <h4>Manage Products</h4>
-                        <h6 className="text-gray-900">
+                        <h2>Manage Products</h2>
+                        <h6 className="text-gray-600">
                           Create, Edit, and Delete your categories
                         </h6>
                       </div>
