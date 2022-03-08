@@ -14,7 +14,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg">
+    <nav className="bg-indigo-600 text-white shadow-md sticky top-0">
       <section className="max-w-7xl mx-auto flex justify-between items-center p-4">
         {/* logo and brand name */}
         <div>
@@ -30,36 +30,36 @@ const Navigation = () => {
             <>
               <Link
                 to="/seller/account"
-                className="py-4 px-2 font-bold text-lg hover:text-indigo-500 transition duration-30"
+                className="py-4 px-2 font-bold text-lg hover:text-indigo-100 transition duration-30"
               >
                 Home
               </Link>
               <button
                 onClick={handleLogout}
-                className="py-2 px-4  bg-indigo-500 text-white rounded-lg font-bold text-lg hover:text-indigo-400 transition duration-300"
+                className="py-2 px-4 bg-white  text-indigo-600 rounded-lg font-bold text-lg hover:text-indigo-00 transition duration-300"
               >
-                Log Out
+                Logout
               </button>
             </>
           ) : (
             <>
               <Link
                 to="/"
-                className="py-4 px-2 font-bold text-lg hover:text-indigo-500 transition duration-30"
+                className="py-4 px-2 font-bold text-lg hover:text-indigo-100 transition duration-30"
               >
                 Home
               </Link>
               <Link
                 to="/login"
-                className="py-2 px-4  bg-indigo-500 text-white rounded-lg font-bold text-lg hover:text-indigo-400 transition duration-300"
+                className="py-4 px-2 font-bold text-lg hover:text-indigo-100 transition duration-30"
               >
-                Log In
+                Login
               </Link>
               <Link
                 to="/signup"
-                className="py-2 px-4  bg-indigo-500 text-white rounded-lg font-bold text-lg hover:text-indigo-400 transition duration-300"
+                className="py-2 px-4 bg-white  text-indigo-600 rounded-lg font-bold text-lg hover:text-indigo-00 transition duration-300"
               >
-                Sign Up
+                Signup
               </Link>
             </>
           )}
