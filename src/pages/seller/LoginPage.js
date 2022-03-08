@@ -33,7 +33,7 @@ const LoginPage = () => {
   return (
     <main className="bg-indigo-600">
       <section className="flex flex-col justify-center  items-center h-screen">
-        <div className="w-96 bg-white rounded-xl shadow-lg p-10">
+        <div className="w-11/12 sm:w-96 bg-white rounded-xl shadow-lg p-10">
           <Link to="/">
             <h2 className="flex gap-x-1 text-3xl text-indigo-600">
               <HiOutlineShoppingBag className="h-8 w-8" />

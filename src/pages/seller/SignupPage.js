@@ -42,8 +42,8 @@ const SignupPage = () => {
 
   return (
     <main className="relative bg-indigo-600">
-      <section className="flex flex-col items-center justify-center h-screen">
-        <div className="w-96 bg-white rounded-xl shadow-lg p-10">
+      <section className="flex flex-col items-center justify-center">
+        <div className="w-11/12 sm:w-96 bg-white rounded-xl shadow-lg p-10 mt-5">
           <Link to="/">
             <h2 className="flex gap-x-1 text-3xl text-indigo-600">
               <HiOutlineShoppingBag className="h-8 w-8" />
