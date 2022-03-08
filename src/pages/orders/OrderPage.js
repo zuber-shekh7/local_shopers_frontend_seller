@@ -40,8 +40,8 @@ const OrderPage = () => {
         {loading && !order && (
           <div className="bg-gray-50 border-2 rounded-lg px-4 py-4 shadow-lg hover:bg-gray-100">
             <div className="animate-pulse grid grid-cols-12">
-              <div className="col-span-12 md:col-span-6 px-5">
-                <div className="h-12 bg-gray-300 rounded-lg mb-3"></div>
+              <div className="col-span-12 md:col-span-6 sm:px-2">
+                <div className="h-4 sm:h-12 bg-gray-300 rounded-lg mb-3"></div>
                 <hr />
                 <div className="h-8 w-5/12 bg-gray-300 rounded-lg mb-3"></div>
                 <div className="h-4 w-5/12 bg-gray-300 rounded-lg mb-3"></div>
@@ -50,7 +50,7 @@ const OrderPage = () => {
                 <div className="h-8 w-5/12 bg-gray-300 rounded-lg mb-3"></div>
                 <div className="h-4 w-5/12 bg-gray-300 rounded-lg mb-3"></div>
               </div>
-              <div className="col-span-12 md:col-span-6 border-l px-5">
+              <div className="col-span-12 md:col-span-6 border-l sm:px-2">
                 <div className="h-8 w-5/12 bg-gray-300 rounded-lg mb-3"></div>
                 <hr />
                 <div className="flex justify-between mb-3">
@@ -93,9 +93,9 @@ const OrderPage = () => {
           </div>
         )}
         {order && (
-          <div className="bg-gray-50 border-2 rounded-lg px-4 py-4 shadow-lg hover:bg-gray-100">
+          <div className="bg-gray-50 border rounded-xl px-4 py-3 shadow-md hover:bg-gray-100">
             <div className="grid grid-cols-12">
-              <div className="col-span-12 md:col-span-6 px-5">
+              <div className="col-span-12 md:col-span-6 sm:px-2">
                 <h2 className="text-sm md:text-3xl uppercase">
                   order | {order._id}{" "}
                 </h2>
@@ -111,7 +111,7 @@ const OrderPage = () => {
                 <h3>Payment</h3>
                 <p>{order.paymentMethod}</p>
               </div>
-              <div className="col-span-12 md:col-span-6 border-l px-5">
+              <div className="col-span-12 md:col-span-6 sm:border-l sm:px-2">
                 <h2>Order Items</h2>
                 <hr />
                 <div className="flex justify-between mb-3">
@@ -125,13 +125,14 @@ const OrderPage = () => {
                     return (
                       <div
                         key={orderItem._id}
-                        className="grid grid-cols-12 items-center mb-3"
+                        className="grid grid-cols-12 gap-x-2 items-center mb-2 sm:mb-5"
                       >
                         <img
-                          className="col-span-2 h-12 rounded-lg"
+                          className="col-span-2 object-cover rounded-lg"
                           src={orderItem.image}
                           alt={orderItem.name}
                         />
+
                         <div className="col-span-10 flex justify-between">
                           <h3>{orderItem.name}</h3>
                           <h3>₹ {orderItem.qty * orderItem.price}/-</h3>
