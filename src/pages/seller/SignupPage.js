@@ -41,13 +41,15 @@ const SignupPage = () => {
   };
 
   return (
-    <main className="bg-indigo-600">
+    <main className="relative bg-indigo-600">
       <section className="flex flex-col items-center justify-center h-screen">
         <div className="w-96 bg-white rounded-xl shadow-lg p-10">
-          <h2 className="flex gap-x-1 text-3xl text-indigo-600">
-            <HiOutlineShoppingBag className="h-8 w-8" />
-            <span className="font-bold ">Local Shoppers</span>
-          </h2>
+          <Link to="/">
+            <h2 className="flex gap-x-1 text-3xl text-indigo-600">
+              <HiOutlineShoppingBag className="h-8 w-8" />
+              <span className="font-bold ">Local Shoppers</span>
+            </h2>
+          </Link>
           <h1 className="my-4">Signup</h1>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-12 gap-x-2">
@@ -136,7 +138,7 @@ const SignupPage = () => {
           </form>
         </div>
         <div className="mt-5">
-          <p className="text-center text-white">
+          <p className="text-center text-white text-xl">
             Already have an account?{" "}
             <Link className="underline" to={routes.login}>
               Login

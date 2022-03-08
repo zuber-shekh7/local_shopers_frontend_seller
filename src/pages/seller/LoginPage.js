@@ -34,10 +34,12 @@ const LoginPage = () => {
     <main className="bg-indigo-600">
       <section className="flex flex-col justify-center  items-center h-screen">
         <div className="w-96 bg-white rounded-xl shadow-lg p-10">
-          <h2 className="flex gap-x-1 text-3xl text-indigo-600">
-            <HiOutlineShoppingBag className="h-8 w-8" />
-            <span className="font-bold ">Local Shoppers</span>
-          </h2>
+          <Link to="/">
+            <h2 className="flex gap-x-1 text-3xl text-indigo-600">
+              <HiOutlineShoppingBag className="h-8 w-8" />
+              <span className="font-bold ">Local Shoppers</span>
+            </h2>
+          </Link>
 
           <h1 className="my-4">Login</h1>
           <form onSubmit={handleSubmit}>
