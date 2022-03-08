@@ -9,8 +9,8 @@ const Breadcrumb = ({ links }) => {
         return (
           <Link
             key={index}
-            className={`text-xs sm:text-sm flex justify-center items-center space-x-1 ${
-              links.length - 1 === index ? "text-indigo-500" : ""
+            className={`text-base sm:text-lg flex justify-center items-center space-x-1 ${
+              links.length - 1 === index ? "text-indigo-600" : ""
             }`}
             to={link.to}
           >
