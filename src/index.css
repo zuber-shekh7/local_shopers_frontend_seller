@@ -40,7 +40,7 @@
   }
 
   label {
-    @apply text-white block;
+    @apply block;
   }
 }
 
