@@ -9,9 +9,7 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [mobile, setMobile] = useState("");
+
   const [message, setMessage] = useState("");
 
   const { loading, seller, error } = useSelector((state) => state.sellerLogin);
@@ -28,7 +26,7 @@ const SignupPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!email && !password && !firstName && !lastName && !mobile) {
+    if (!email && !password) {
       return;
     }
 
@@ -37,60 +35,22 @@ const SignupPage = () => {
       return;
     }
 
-    dispatch(sellerSignup(email, password, firstName, lastName, mobile));
+    dispatch(sellerSignup(email, password));
   };
 
   return (
-    <main className="relative bg-indigo-600">
-      <section className="flex flex-col items-center justify-center">
-        <div className="w-11/12 sm:w-96 bg-white rounded-xl shadow-lg p-10 mt-5">
+    <main className="bg-indigo-600">
+      <section className="flex flex-col justify-center  items-center h-screen">
+        <div className="w-11/12 sm:w-96 bg-white rounded-xl shadow-lg p-10">
           <Link to="/">
             <h2 className="flex gap-x-1 text-3xl text-indigo-600">
               <HiOutlineShoppingBag className="h-8 w-8" />
               <span className="font-bold ">Local Shoppers</span>
             </h2>
           </Link>
+
           <h1 className="my-4">Signup</h1>
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-12 gap-x-2">
-              <div className="mb-5 col-span-6">
-                <label htmlFor="firstName">First Name</label>
-                <input
-                  className="w-full text-lg py-2 px-2 rounded-lg border-2 border-indigo-600  focus:ring-indigo-600"
-                  type="text"
-                  id="firstName"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="Steve"
-                  required
-                />
-              </div>
-              <div className="mb-5 col-span-6">
-                <label htmlFor="lastName">Last Name</label>
-                <input
-                  className="w-full text-lg py-2 px-2 rounded-lg border-2 border-indigo-600  focus:ring-indigo-600"
-                  type="text"
-                  id="lastName"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Jobs"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="mb-5">
-              <label htmlFor="mobile">Mobile</label>
-              <input
-                className="w-full text-lg py-2 px-2 rounded-lg border-2 border-indigo-600  focus:ring-indigo-600"
-                type="text"
-                id="mobile"
-                value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
-                placeholder="9876543210"
-                required
-              />
-            </div>
             <div className="mb-5">
               <label htmlFor="email">Email</label>
               <input
@@ -111,29 +71,35 @@ const SignupPage = () => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="password"
+                placeholder="don't share your password"
                 required
               />
             </div>
             <div className="mb-5">
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <label htmlFor="password">Confirm Password</label>
               <input
                 className="w-full text-lg py-2 px-2 rounded-lg border-2 border-indigo-600  focus:ring-indigo-600"
                 type="password"
-                id="confirmPassword"
+                id="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="confirm password"
                 required
               />
             </div>
-            <div>
+            <div className="mb-5">
               <button
                 className="btn text-lg bg-indigo-600 w-full border hover:bg-indigo-700"
                 type="submit"
               >
                 Signup
               </button>
+            </div>
+
+            <div className="mb-5 text-center">
+              {!loading && error && <p className="text-red-500">{error}</p>}
+              {!loading && message && <p className="text-red-500">{message}</p>}
+              {loading && <p>Loading...</p>}
             </div>
           </form>
         </div>

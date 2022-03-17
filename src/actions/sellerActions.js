@@ -35,27 +35,23 @@ const sellerLogin = (email, password) => async (dispatch) => {
   }
 };
 
-const sellerSignup =
-  (email, password, firstName, lastName, mobile) => async (dispatch) => {
-    try {
-      dispatch({ type: SELLER_SIGNUP_REQUEST });
+const sellerSignup = (email, password) => async (dispatch) => {
+  try {
+    dispatch({ type: SELLER_SIGNUP_REQUEST });
 
-      const { data } = await backendAPI.post("/sellers/signup", {
-        email,
-        password,
-        firstName,
-        lastName,
-        mobile,
-      });
+    const { data } = await backendAPI.post("/sellers/signup", {
+      email,
+      password,
+    });
 
-      dispatch(sellerLogin(email, password));
+    dispatch(sellerLogin(email, password));
 
-      dispatch({ type: SELLER_SIGNUP_SUCCESS, payload: data });
-    } catch (err) {
-      const error = err.response ? err.response.data.message : err.message;
-      dispatch({ type: SELLER_SIGNUP_FAIL, payload: error });
-    }
-  };
+    dispatch({ type: SELLER_SIGNUP_SUCCESS, payload: data });
+  } catch (err) {
+    const error = err.response ? err.response.data.message : err.message;
+    dispatch({ type: SELLER_SIGNUP_FAIL, payload: error });
+  }
+};
 
 const sellerLogout = () => async (dispatch) => {
   try {
