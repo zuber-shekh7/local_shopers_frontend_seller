@@ -1,70 +1,176 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { HiOutlineShoppingBag } from "react-icons/hi";
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  HiOutlineShoppingCart,
+  HiOutlineUserCircle,
+  HiOutlineLogin,
+  HiOutlineHome,
+  HiOutlineLogout,
+  HiMenu,
+  HiX,
+  HiArrowRight,
+} from "react-icons/hi";
+
+import routes from "../../utils/routes";
 import { sellerLogout } from "../../actions/sellerActions";
 
 const Navigation = () => {
-  const { seller } = useSelector((state) => state.sellerLogin);
+  const [isOpen, setIsOpen] = useState(false);
 
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
+  const { seller } = useSelector((state) => state.sellerLogin);
+
+  const handleSellerLogout = () => {
     dispatch(sellerLogout());
   };
 
   return (
-    <nav className="bg-indigo-600 text-white shadow-md sticky top-0">
-      <section className="max-w-7xl mx-auto flex justify-between items-center p-4">
+    <nav className="bg-white text-darkBlue text-bg-indigo-600  border-b border-gray-100 sticky top-0 p-4">
+      <section className="relative max-w-7xl mx-auto flex justify-between items-center h-16">
         {/* logo and brand name */}
-        <div>
-          <Link to="/" className="flex items-center space-x-1">
-            <HiOutlineShoppingBag className="h-8 w-8" />
-            <span className="text-2xl font-bold ">Local Shoppers</span>
-            <span className="text-sm">Seller</span>
+        <div className="hidden sm:flex items-center justify-between">
+          <Link
+            to={seller ? "/seller/account" : "/"}
+            className="flex items-center space-x-1"
+          >
+            <HiOutlineShoppingCart className="h-8 w-8" />
+
+            <span className="text-2xl font-bold ">
+              Local Shoppers <sup className="text-xs font-medium">Seller</sup>
+            </span>
           </Link>
         </div>
-        {/* links */}
-        <div className="hidden lg:flex space-x-2 items-center">
+        {/* mobile menu button */}
+        <div className="absolute inset-y-0 left-0 flex items-center sm:hidden space-x-3">
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? (
+              <HiX className="inline md:hidden h-8 w-8" />
+            ) : (
+              <HiMenu className="inline md:hidden h-8 w-8" />
+            )}
+          </button>
+          <Link
+            to={seller ? "/seller/account" : "/"}
+            className="flex items-center space-x-1"
+          >
+            <HiOutlineShoppingCart className="h-8 w-8" />
+
+            <span className="text-2xl font-bold ">
+              Local Shoppers <sup className="text-xs font-medium">Seller</sup>
+            </span>
+          </Link>
+        </div>
+        {/* desktop menu */}
+        <div className="hidden sm:flex space-x-3 items-center">
           {seller ? (
             <>
-              <Link
-                to="/seller/account"
-                className="py-4 px-2 font-bold text-lg hover:text-indigo-100 transition duration-30"
+              <NavLink
+                className={(isActive) =>
+                  "flex items-center space-x-1 py-4 px-2 text-lg hover:text-indigo-600 transition duration-300" +
+                  (isActive.isActive ? " text-indigo-600" : "")
+                }
+                to={routes.dashboard}
               >
-                Home
-              </Link>
+                <HiOutlineUserCircle className="h-6 w-6" />
+                <span>Account</span>
+              </NavLink>
+
               <button
-                onClick={handleLogout}
-                className="py-2 px-4 bg-white  text-indigo-600 rounded-lg font-bold text-lg hover:text-indigo-00 transition duration-300"
+                className="flex items-center space-x-1 py-2 px-5 text-white  bg-indigo-600 rounded-full  text-lg hover:bg-indigo-700 transition duration-300"
+                onClick={handleSellerLogout}
               >
-                Logout
+                <HiOutlineLogout className="h-6 w-6" />
+                <span>Logout</span>
               </button>
             </>
           ) : (
             <>
-              <Link
-                to="/"
-                className="py-4 px-2 font-bold text-lg hover:text-indigo-100 transition duration-30"
+              <NavLink
+                className={(isActive) =>
+                  "flex items-center space-x-1 py-4 px-2 text-lg hover:text-indigo-600 transition duration-300" +
+                  (isActive.isActive ? " text-indigo-600" : "")
+                }
+                to={routes.home}
               >
-                Home
+                <HiOutlineHome className="h-6 w-6" />
+                <span>Home</span>
+              </NavLink>
+              <Link
+                className="flex items-center space-x-1 py-4 px-2 text-lg hover:text-indigo-600 transition duration-300"
+                to={routes.login}
+              >
+                <HiOutlineLogin className="h-6 w-6" />
+                <span>Login</span>
               </Link>
               <Link
-                to="/login"
-                className="py-4 px-2 font-bold text-lg hover:text-indigo-100 transition duration-30"
+                className="flex items-center space-x-1 py-2 px-5 text-white  bg-indigo-600 rounded-full  text-lg hover:bg-indigo-700 transition duration-300"
+                to={routes.signup}
               >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                className="py-2 px-4 bg-white  text-indigo-600 rounded-lg font-bold text-lg hover:text-indigo-00 transition duration-300"
-              >
-                Signup
+                <span>Signup</span>
+                <HiArrowRight className="h-6 w-6" />
               </Link>
             </>
           )}
         </div>
       </section>
+      {/* mobile menu */}
+      {isOpen && (
+        <div className="sm:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {seller ? (
+              <>
+                <NavLink
+                  className={(isActive) =>
+                    "flex items-center space-x-1 rounded py-2 px-3 text-lg hover:text-indigo-600 transition duration-300" +
+                    (isActive.isActive ? " text-indigo-600" : "")
+                  }
+                  to={routes.dashboard}
+                >
+                  <HiOutlineUserCircle className="h-6 w-6" />
+                  <span>Account</span>
+                </NavLink>
+
+                <button
+                  className="flex items-center space-x-1 rounded py-2 px-3 text-lg hover:text-indigo-600 transition duration-300"
+                  onClick={handleSellerLogout}
+                >
+                  <HiOutlineLogout className="h-6 w-6" />
+                  <span>Log Out</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  className={(isActive) =>
+                    "flex items-center space-x-1 rounded py-2 px-3 text-lg hover:text-indigo-600 transition duration-300" +
+                    (isActive.isActive ? " text-indigo-600" : "")
+                  }
+                  to={routes.home}
+                >
+                  <HiOutlineHome className="h-6 w-6" />
+                  <span>Home</span>
+                </NavLink>
+                <Link
+                  className="flex items-center space-x-1 rounded py-2 px-3 text-lg hover:text-indigo-600 transition duration-300"
+                  to={routes.login}
+                >
+                  <HiOutlineLogin className="h-6 w-6" />
+                  <span>Login</span>
+                </Link>
+                <Link
+                  className="flex items-center space-x-1 rounded py-2 px-3 text-lg hover:text-indigo-600 transition duration-300"
+                  to={routes.signup}
+                >
+                  <HiOutlineUserCircle className="h-6 w-6" />
+                  <span>Register</span>
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
