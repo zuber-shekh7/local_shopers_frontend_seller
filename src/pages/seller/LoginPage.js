@@ -75,6 +75,10 @@ const LoginPage = () => {
                 Login
               </button>
             </div>
+            <div className="text-center">
+              {loading && <p>Loading...</p>}
+              {!loading && error && <p className="text-red-500">{error}</p>}
+            </div>
           </form>
         </div>
         <div className="mt-5">
