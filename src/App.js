@@ -43,7 +43,7 @@ const App = () => {
             }
           />
           <Route
-            path={`${routes.getBusiness}/:business_id`}
+            path={`${routes.getBusiness}/:businessId`}
             element={
               <ProtectedRoute>
                 <BusinessPage />
