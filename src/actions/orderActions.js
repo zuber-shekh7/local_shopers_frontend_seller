@@ -8,17 +8,17 @@ import {
   GET_ORDER_SUCCESS,
 } from "../constants/orders";
 
-const getOrders = (business_id) => async (dispatch) => {
+const getOrders = (businessId) => async (dispatch) => {
   try {
     dispatch({ type: GET_ORDERS_REQUEST });
 
-    const token = JSON.parse(localStorage.getItem("token"));
+    const token = `Bearer ${JSON.parse(localStorage.getItem("token"))}`;
 
     const { data } = await backendAPI.get(`/orders/seller`, {
       headers: {
         Authorization: token,
       },
-      params: { business_id },
+      params: { businessId },
     });
 
     const { orders } = data;

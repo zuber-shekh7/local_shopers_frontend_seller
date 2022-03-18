@@ -10,7 +10,7 @@ const OrdersPage = () => {
     seller: { business },
   } = useSelector((state) => state.sellerLogin);
 
-  const { loading, orders, errror } = useSelector((state) => state.getOrders);
+  const { loading, orders, error } = useSelector((state) => state.getOrders);
 
   const dispatch = useDispatch();
 
@@ -35,6 +35,11 @@ const OrdersPage = () => {
         />
         <h1>Your Orders</h1>
         <hr />
+        {error && !loading && (
+          <p className="text-center text-red-500">
+            Something went wrong. Please try after sometime .
+          </p>
+        )}
         {loading && !orders && (
           <div className="grid grid-cols-1 md:grid-cols-3  gap-3">
             {[
