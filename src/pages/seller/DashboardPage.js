@@ -24,14 +24,15 @@ const DashboardPage = () => {
   }, [_id, dispatch]);
 
   return (
-    <main>
-      <section className="container">
+    <main className="container">
+      <section>
+        <h1>Your Account</h1>
+        <hr />
+        {error && <p className="text-center text-red-500">{error}</p>}
         {seller && (
           <>
             {seller.business ? (
               <>
-                <h1>Your Account</h1>
-                <hr />
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-2">
                   <div className="px-3 py-4 border-2 rounded-lg span-col-1 mb-3 hover:bg-gray-100">
                     <Link

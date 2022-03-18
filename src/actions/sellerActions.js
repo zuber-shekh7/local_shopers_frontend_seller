@@ -70,7 +70,7 @@ const getSeller = (id) => async (dispatch) => {
   try {
     dispatch({ type: GET_SELLER_REQUEST });
 
-    const token = JSON.parse(localStorage.getItem("token"));
+    const token = `Bearer ${JSON.parse(localStorage.getItem("token"))}`;
 
     const { data } = await backendAPI.get(`/sellers/${id}`, {
       headers: {
