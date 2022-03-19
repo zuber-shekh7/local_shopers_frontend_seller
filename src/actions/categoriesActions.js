@@ -22,7 +22,7 @@ const getCategories = (id) => async (dispatch) => {
   try {
     dispatch({ type: GET_CATEGORIES_REQUEST });
 
-    const token = JSON.parse(localStorage.getItem("token"));
+    const token = `Bearer ${JSON.parse(localStorage.getItem("token"))}`;
     const { business } = JSON.parse(localStorage.getItem("seller"));
 
     const { data } = await backendAPI.get("/categories", {

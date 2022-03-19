@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCategories } from "../../actions/categoriesActions";
+import Breadcrumb from "../../components/shared/Breadcrumb";
 import routes from "../../utils/routes";
 
 const CategoriesPage = () => {
@@ -16,19 +17,32 @@ const CategoriesPage = () => {
   }, [dispatch]);
 
   return (
-    <main>
-      <section className="m-10 px-10 max-w-6xl mx-auto">
-        <div className="grid grid-cols-1">
+    <main className="container">
+      <section>
+        <Breadcrumb
+          links={[
+            {
+              name: "your account",
+              to: routes.dashboard,
+            },
+            {
+              name: "manage categories",
+              to: routes.getCategories,
+            },
+          ]}
+        />
+        <div>
           <div className="flex justify-between items-center mb-3">
-            <h1 className="text-4xl font-bold mb-4">Manage Categories</h1>
+            <h1>Manage Categories</h1>
             <Link
-              className="bg-indigo-500 text-white rounded-lg px-3 py-2"
+              className="bg-indigo-600 text-white text-lg rounded-lg px-3 py-2 hover:bg-indigo-700"
               to={routes.createCategory}
             >
               Add category
             </Link>
           </div>
         </div>
+        <hr />
         <div>
           {categories && categories.length && categories.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -37,7 +51,7 @@ const CategoriesPage = () => {
                   <Link
                     to={`${routes.getCategories}/${category._id}`}
                     key={category._id}
-                    className="bg-gray-50 border-2 rounded-lg px-4 py-4 shadow-lg hover:bg-gray-100"
+                    className="bg-gray-50 border-2 rounded-lg px-4 py-4 shadow-md hover:bg-gray-100"
                   >
                     <div className="flex items-center space-x-2">
                       <img
