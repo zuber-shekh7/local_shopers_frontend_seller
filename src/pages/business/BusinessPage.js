@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import clipboard from "clipboardy";
 import { Link, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import { getBusiness } from "../../actions/businessActions";
 import routes from "../../utils/routes";
+import { HiShare } from "react-icons/hi";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 
 const BusinessPage = () => {
@@ -18,9 +21,24 @@ const BusinessPage = () => {
     dispatch(getBusiness(businessId));
   }, [businessId, dispatch]);
 
+  const copyToClipboard = async () => {
+    const onlineStoreLink = `${window.location.origin}/business/${businessId}`;
+    await clipboard.write(onlineStoreLink);
+    toast.success("Linked copied successfully.");
+  };
+
   return (
     <main className="container">
       <section>
+        {/* toast */}
+        <ToastContainer
+          position="bottom-center"
+          hideProgressBar
+          closeOnClick
+          draggable={false}
+          theme="colored"
+        />
+        {/* breadcrumb */}
         <Breadcrumb
           links={[
             {
@@ -37,7 +55,14 @@ const BusinessPage = () => {
         <hr />
         {business && (
           <div className="w-full mx-auto">
-            <div className="flex justify-end mb-5">
+            <div className="flex justify-end mb-5 gap-x-2">
+              <button
+                onClick={copyToClipboard}
+                className="flex justify-center items-center gap-x-2 px-3 py-1 text-lg bg-indigo-700 text-white rounded-md hover:bg-indigo-800"
+              >
+                <HiShare />
+                <span>Share</span>
+              </button>
               <Link
                 to={`${routes.getBusiness}/${business._id}/edit`}
                 className="px-3 py-1 text-lg bg-indigo-700 text-white rounded-md hover:bg-indigo-800"
