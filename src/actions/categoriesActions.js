@@ -26,7 +26,7 @@ const getCategories = (id) => async (dispatch) => {
     const { business } = JSON.parse(localStorage.getItem("seller"));
 
     const { data } = await backendAPI.get("/categories", {
-      params: { business_id: business },
+      params: { businessId: business },
       headers: {
         Authorization: token,
       },

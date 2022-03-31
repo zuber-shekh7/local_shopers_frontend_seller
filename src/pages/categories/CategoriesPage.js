@@ -19,6 +19,7 @@ const CategoriesPage = () => {
   return (
     <main className="container">
       <section>
+        {/* breadcrumb */}
         <Breadcrumb
           links={[
             {
@@ -51,18 +52,21 @@ const CategoriesPage = () => {
                   <Link
                     to={`${routes.getCategories}/${category._id}`}
                     key={category._id}
-                    className="bg-gray-50 border-2 rounded-lg px-4 py-4 shadow-md hover:bg-gray-100"
+                    className="card border-0"
                   >
-                    <div className="flex items-center space-x-2">
-                      <img
-                        className="block h-10 w-10 rounded-full"
-                        src={category.image}
-                        alt={category.image}
-                      />
-
-                      <h2 className="text-2xl font-semibold">
-                        {category.name}
-                      </h2>
+                    <div
+                      className="flex justify-center h-64 w-full rounded-lg hover:opacity-90 hover:text-indigo-700 transition duration-500"
+                      style={{
+                        backgroundImage: `url(${category.image})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    >
+                      <div className="flex justify-center items-center">
+                        <h2 className="text-indigo-600 px-3 py-2 bg-white rounded-lg">
+                          {category.name}
+                        </h2>
+                      </div>
                     </div>
                   </Link>
                 );

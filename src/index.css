@@ -54,4 +54,8 @@
   .btn {
     @apply py-2 px-4 text-xl hover:bg-indigo-600 bg-indigo-500 rounded-lg text-white shadow-lg;
   }
+
+  .card {
+    @apply bg-gray-50 border rounded-lg shadow-md hover:bg-gray-100 overflow-hidden;
+  }
 }
