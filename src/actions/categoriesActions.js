@@ -48,7 +48,7 @@ const createCategory = (formData) => async (dispatch) => {
     const token = JSON.parse(localStorage.getItem("token"));
     const seller = JSON.parse(localStorage.getItem("seller"));
 
-    formData.append("business_id", seller.business);
+    formData.append("businessId", seller.business);
 
     const { data } = await backendAPI.post("/categories", formData, {
       headers: {
@@ -61,7 +61,9 @@ const createCategory = (formData) => async (dispatch) => {
     dispatch({ type: CREATE_CATEGORY_SUCCESS, payload: category });
     dispatch({ type: CREATE_CATEGORY_SUCCESS, payload: null });
   } catch (err) {
-    const error = err.response ? err.response.data.message : err.message;
+    const error = err.response
+      ? err.response.data.message || err.response.data.error
+      : err.message;
     dispatch({ type: CREATE_CATEGORY_FAIL, payload: error });
   }
 };

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import { HiOutlineArrowSmLeft } from "react-icons/hi";
+import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import FormData from "form-data";
 import routes from "../../utils/routes";
 import { createCategory } from "../../actions/categoriesActions";
+import Breadcrumb from "../../components/shared/Breadcrumb";
 
 const CreateCategoryPage = () => {
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
 
   const { loading, category, error } = useSelector(
@@ -20,14 +19,13 @@ const CreateCategoryPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name && !description && !image) {
+    if (!name && !image) {
       return;
     }
 
     const formData = new FormData();
 
     formData.append("name", name);
-    formData.append("description", description);
     formData.append("image", image);
 
     dispatch(createCategory(formData));
@@ -38,24 +36,32 @@ const CreateCategoryPage = () => {
   }
 
   return (
-    <main>
-      <section className="m-10 px-10 max-w-xl mx-auto">
-        <div className="flex justify-center bg-gray-50 border-2 border-gray-50 py-5 rounded-lg shadow-lg px-10">
-          <div>
-            <div className="flex justify-start">
-              <Link
-                className="inline-block p-2 bg-white-100 border-2 border-gray-500 rounded-full text-gray-500 mb-5"
-                to={routes.getCategories}
-              >
-                <span>
-                  <HiOutlineArrowSmLeft className="h-6 w-6" />
-                </span>
-              </Link>
+    <main className="container max-w-xl">
+      <section>
+        {/* breadcrumb */}
+        <Breadcrumb
+          links={[
+            {
+              name: "your account",
+              to: routes.dashboard,
+            },
+            {
+              name: "categories",
+              to: routes.getCategories,
+            },
+
+            {
+              name: "new",
+              to: "",
+            },
+          ]}
+        />
+        <div className="flex justify-center form border-0 shadow-lg">
+          <div className="flex-1">
+            <div className="bg-indigo-600 py-2">
+              <h1 className="text-center text-white">Add category</h1>
             </div>
-            <h1 className="text-center text-4xl font-semibold mb-4">
-              Create category
-            </h1>
-            <form onSubmit={handleSubmit}>
+            <form className="p-5" onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label className="block" htmlFor="name">
                   Name
@@ -71,17 +77,6 @@ const CreateCategoryPage = () => {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="description">Description</label>
-                <textarea
-                  id="description"
-                  className="text-lg w-full py-2 px-2 border-2 rounded-lg border-gray  resize-none"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="The Best iPhone Ever"
-                  required
-                ></textarea>
-              </div>
-              <div className="mb-3">
                 <label htmlFor="image">Image</label>
                 <input
                   id="image"
@@ -95,7 +90,7 @@ const CreateCategoryPage = () => {
               </div>
               <div className="mb-3">
                 <button
-                  className="w-full bg-indigo-500 text-white rounded-lg px-3 py-2 mb-3"
+                  className="w-full bg-indigo-600 text-white rounded-lg px-3 py-2 mb-3 hover:bg-indigo-700"
                   type="submit"
                 >
                   Create
