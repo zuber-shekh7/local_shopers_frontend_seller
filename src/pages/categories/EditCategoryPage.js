@@ -6,6 +6,7 @@ import FormData from "form-data";
 import routes from "../../utils/routes";
 import { editCategory, getCategory } from "../../actions/categoriesActions";
 import { useEffect } from "react";
+import Breadcrumb from "../../components/shared/Breadcrumb";
 
 const EditCategoryPage = () => {
   const [name, setName] = useState("");
@@ -23,11 +24,11 @@ const EditCategoryPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { category_id } = useParams();
+  const { categoryId } = useParams();
 
   useEffect(() => {
-    dispatch(getCategory(category_id));
-  }, [category_id, dispatch]);
+    dispatch(getCategory(categoryId));
+  }, [categoryId, dispatch]);
 
   useEffect(() => {
     if (category) {
@@ -43,7 +44,7 @@ const EditCategoryPage = () => {
     }
 
     if (name === category.name && !image) {
-      return navigate(`${routes.getCategories}/${category_id}`);
+      return navigate(`${routes.getCategories}/${categoryId}`);
     }
 
     const formData = new FormData();
@@ -51,7 +52,7 @@ const EditCategoryPage = () => {
     formData.append("name", name);
     formData.append("image", image);
 
-    dispatch(editCategory(formData, category_id));
+    dispatch(editCategory(formData, categoryId));
   };
 
   if (updatedCategory) {
@@ -59,24 +60,35 @@ const EditCategoryPage = () => {
   }
 
   return (
-    <main>
-      <section className="m-10 px-10 max-w-xl mx-auto">
-        <div className="flex justify-center bg-gray-50 border-2 border-gray-50 py-5 rounded-lg shadow-lg px-10">
-          <div>
-            <div className="flex justify-start">
-              <Link
-                className="inline-block p-2 bg-white-100 border-2 border-gray-500 rounded-full text-gray-500 mb-5"
-                to={routes.getCategories}
-              >
-                <span>
-                  <HiOutlineArrowSmLeft className="h-6 w-6" />
-                </span>
-              </Link>
+    <main className="container max-w-xl">
+      <section>
+        {/* breadcrumb */}
+        <Breadcrumb
+          links={[
+            {
+              name: "your account",
+              to: routes.dashboard,
+            },
+            {
+              name: "categories",
+              to: routes.getCategories,
+            },
+            {
+              name: "Category",
+              to: `${routes.getCategories}/${categoryId}`,
+            },
+            {
+              name: "Edit",
+              to: "",
+            },
+          ]}
+        />
+        <div className="flex justify-center form border-0 shadow-lg">
+          <div className="flex-1">
+            <div className="bg-indigo-600 py-2">
+              <h1 className="text-center text-white">Edit category</h1>
             </div>
-            <h1 className="text-center text-4xl font-semibold mb-4">
-              Edit category
-            </h1>
-            <form onSubmit={handleSubmit}>
+            <form className="p-5" onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label className="block" htmlFor="name">
                   Name
@@ -105,7 +117,7 @@ const EditCategoryPage = () => {
               </div>
               <div className="mb-3">
                 <button
-                  className="w-full bg-indigo-500 text-white rounded-lg px-3 py-2 mb-3"
+                  className="w-full bg-indigo-600 text-white rounded-lg px-3 py-2 mb-3 hover:bg-indigo-700"
                   type="submit"
                 >
                   Save

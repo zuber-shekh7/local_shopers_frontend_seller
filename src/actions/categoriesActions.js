@@ -80,14 +80,14 @@ const getCategory = (id) => async (dispatch) => {
   }
 };
 
-const editCategory = (formData, category_id) => async (dispatch) => {
+const editCategory = (formData, categoryId) => async (dispatch) => {
   try {
     dispatch({ type: EDIT_CATEGORY_REQUEST });
 
     const token = JSON.parse(localStorage.getItem("token"));
 
     const { data } = await backendAPI.put(
-      `/categories/${category_id}`,
+      `/categories/${categoryId}`,
       formData,
       {
         headers: {

@@ -58,4 +58,7 @@
   .card {
     @apply bg-gray-50 border rounded-lg shadow-md hover:bg-gray-100 overflow-hidden;
   }
+  .form {
+    @apply bg-gray-50 border rounded-lg shadow-md overflow-hidden;
+  }
 }

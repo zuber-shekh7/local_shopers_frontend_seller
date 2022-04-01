@@ -77,7 +77,7 @@ const App = () => {
             }
           />
           <Route
-            path={`${routes.getCategories}/:category_id/edit`}
+            path={`${routes.getCategories}/:categoryId/edit`}
             element={
               <ProtectedRoute>
                 <EditCategoryPage />
