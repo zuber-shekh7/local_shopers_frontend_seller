@@ -7,6 +7,9 @@ import { getBusiness } from "../../actions/businessActions";
 import routes from "../../utils/routes";
 import { HiShare } from "react-icons/hi";
 import Breadcrumb from "../../components/shared/Breadcrumb";
+import HeaderContainer from "../../components/shared/HeaderContainer";
+import { Error } from "../../components/messages";
+import { Loader } from "../../components/loaders";
 
 const BusinessPage = () => {
   const { businessId } = useParams();
@@ -28,8 +31,11 @@ const BusinessPage = () => {
   };
 
   return (
-    <main className="container">
-      <section>
+    <main>
+      <HeaderContainer>
+        <h1>Manage Business</h1>
+      </HeaderContainer>
+      <section className="container">
         {/* toast */}
         <ToastContainer
           position="bottom-center"
@@ -42,17 +48,17 @@ const BusinessPage = () => {
         <Breadcrumb
           links={[
             {
-              name: "your account",
+              name: "home",
               to: routes.dashboard,
             },
             {
-              name: "your business",
-              to: `${routes.getBusiness}/${businessId}`,
+              name: "manage business",
+              to: "",
             },
           ]}
         />
-        <h1>Your Business</h1>
-        <hr />
+        {error && <Error />}
+        {loading && <Loader />}
         {business && (
           <div className="w-full mx-auto">
             <div className="flex justify-end mb-5 gap-x-2">
@@ -89,7 +95,7 @@ const BusinessPage = () => {
                   to={routes.getCategories}
                   className="px-3 py-1 text-lg bg-indigo-700 text-white rounded-md hover:bg-indigo-800"
                 >
-                  <span>Manage Categories</span>
+                  <span>Explore</span>
                 </Link>
               </div>
               <hr />
