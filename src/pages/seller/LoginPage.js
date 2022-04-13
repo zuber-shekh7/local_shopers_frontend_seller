@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { sellerLogin } from "../../actions/sellerActions";
-import { HiOutlineShoppingBag } from "react-icons/hi";
 import routes from "../../utils/routes";
+import { Logo } from "../../components/logos";
+import { FormGroup } from "../../components/forms/containers";
+import { Input, Label } from "../../components/forms/inputs";
+import { Button } from "../../components/buttons";
+import { Loader } from "../../components/loaders";
+import { Error } from "../../components/messages";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +21,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (seller) {
-      navigate("/seller/account");
+      navigate(routes.dashboard);
     }
   }, [seller, navigate]);
 
@@ -41,51 +46,42 @@ const LoginPage = () => {
     <main className="bg-indigo-600">
       <section className="flex flex-col justify-center  items-center h-screen">
         <div className="w-11/12 sm:w-96 bg-white rounded-xl shadow-lg p-10">
-          <Link to="/">
-            <h2 className="flex gap-x-1 text-3xl text-indigo-600">
-              <HiOutlineShoppingBag className="h-8 w-8" />
-              <span className="font-bold ">Local Shoppers</span>
-            </h2>
-          </Link>
-
+          <Logo />
           <h1 className="my-4">Login</h1>
           <form onSubmit={handleSubmit}>
-            <div className="mb-5">
-              <label htmlFor="email">Email</label>
-              <input
-                className="w-full text-lg py-2 px-2 rounded-lg border-2 border-indigo-600  focus:ring-indigo-600"
+            <FormGroup className="mb-5">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                className="w-full"
                 type="email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="seller@example.com"
+                placeholder="Enter your email"
                 required
               />
-            </div>
-            <div className="mb-5">
-              <label htmlFor="password">Password</label>
-              <input
-                className="w-full text-lg py-2 px-2 rounded-lg border-2 border-indigo-600  focus:ring-indigo-600"
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                className="w-full"
                 type="password"
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="don't share your password"
+                placeholder="Enter your password"
                 required
               />
-            </div>
-            <div className="mb-5">
-              <button
-                className="btn text-lg bg-indigo-600 w-full border hover:bg-indigo-700"
-                type="submit"
-              >
+            </FormGroup>
+            <FormGroup>
+              <Button className="w-full" type="submit">
                 Login
-              </button>
-            </div>
-            <div className="text-center">
-              {loading && <p>Loading...</p>}
-              {!loading && error && <p className="text-red-500">{error}</p>}
-            </div>
+              </Button>
+            </FormGroup>
+            <FormGroup className="flex justify-center mb-0">
+              {loading && <Loader />}
+              {error && <Error>{error}</Error>}
+            </FormGroup>
           </form>
         </div>
         <div className="mt-5">

@@ -18,7 +18,7 @@ const sellerLoginReducer = (state = {}, action) => {
     case SELLER_LOGIN_REQUEST:
       return { ...state, loading: true };
     case SELLER_LOGIN_SUCCESS:
-      return { ...state, loading: false, seller: action.payload };
+      return { ...state, loading: false, error: null, seller: action.payload };
     case SELLER_LOGIN_FAIL:
       return { ...state, loading: false, error: action.payload };
     case SELLER_LOGOUT_REQUEST:
