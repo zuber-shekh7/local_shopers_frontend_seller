@@ -1,24 +1,20 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { HiMenu, HiMenuAlt1 } from "react-icons/hi";
-import { userLogout } from "../../actions/userActions";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import { Logo } from "../logos";
+import { sellerLogout } from "../../actions/sellerActions";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.userLogin);
+  const { seller } = useSelector((state) => state.sellerLogin);
 
-  const { cartItems } = useSelector((state) => state.cart);
-
-  const noCartItems = cartItems.length;
-
-  const handleUserLogout = () => {
-    dispatch(userLogout());
+  const handleSellerLogout = () => {
+    dispatch(sellerLogout());
   };
 
   return (
@@ -40,19 +36,11 @@ const Navigation = () => {
           <Logo />
         </div>
         {/* desktop menu */}
-        <DesktopMenu
-          user={user}
-          handleUserLogout={handleUserLogout}
-          noCartItems={noCartItems}
-        />
+        <DesktopMenu user={seller} handleUserLogout={handleSellerLogout} />
       </section>
       {/* mobile menu */}
       {isOpen && (
-        <MobileMenu
-          user={user}
-          handleUserLogout={handleUserLogout}
-          noCartItems={noCartItems}
-        />
+        <MobileMenu user={seller} handleUserLogout={handleSellerLogout} />
       )}
     </nav>
   );
