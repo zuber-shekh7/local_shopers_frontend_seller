@@ -12,6 +12,8 @@ import { getSeller } from "../../actions/sellerActions";
 import routes from "../../utils/routes";
 import HeaderContainer from "../../components/shared/HeaderContainer";
 import { Card } from "../../components/cards";
+import { Loader } from "../../components/loaders";
+import { Error } from "../../components/messages";
 
 const DashboardPage = () => {
   const {
@@ -37,12 +39,24 @@ const DashboardPage = () => {
         </div>
       </HeaderContainer>
       <section className="container">
-        {error && <p className="text-center text-red-500">{error}</p>}
+        {error && <Error />}
+        {loading && <Loader />}
         {seller && (
           <>
             {seller.business ? (
               <>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-2">
+                  <Card className="hover:bg-indigo-100 transition duration-500">
+                    <Link className="flex space-x-2" to={routes.getCategories}>
+                      <div>
+                        <HiOutlineUserCircle className="h-8 w-8" />
+                      </div>
+                      <div>
+                        <h4 className="text-2xl font-medium">Your Profile</h4>
+                        <h6>Edit email, mobile, name etc...</h6>
+                      </div>
+                    </Link>
+                  </Card>
                   <Card className="hover:bg-indigo-100 transition duration-500">
                     <Link
                       className="flex space-x-2"
@@ -55,7 +69,7 @@ const DashboardPage = () => {
                         <h4 className="text-2xl font-medium">
                           Manage Business
                         </h4>
-                        <h6>Create, Edit, and Delete your categories</h6>
+                        <h6>Edit name, category and many more</h6>
                       </div>
                     </Link>
                   </Card>
@@ -66,7 +80,7 @@ const DashboardPage = () => {
                       </div>
                       <div>
                         <h4 className="text-2xl font-medium">Manage Orders</h4>
-                        <h6>Create, Edit, and Delete your categories</h6>
+                        <h6>Manage orders</h6>
                       </div>
                     </Link>
                   </Card>
@@ -80,19 +94,6 @@ const DashboardPage = () => {
                           Manage Categories
                         </h4>
                         <h6>Create, Edit, and Delete your categories</h6>
-                      </div>
-                    </Link>
-                  </Card>
-                  <Card className="hover:bg-indigo-100 transition duration-500">
-                    <Link className="flex space-x-2" to={routes.getCategories}>
-                      <div>
-                        <HiOutlineUserCircle className="h-8 w-8" />
-                      </div>
-                      <div>
-                        <h4 className="text-2xl font-medium">Your Profile</h4>
-                        <h6 className="text-gray-600">
-                          Create, Edit, and Delete your categories
-                        </h6>
                       </div>
                     </Link>
                   </Card>
