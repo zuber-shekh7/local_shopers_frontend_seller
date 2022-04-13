@@ -30,6 +30,13 @@ const LoginPage = () => {
     dispatch(sellerLogin(email, password));
   };
 
+  const handleGuestLogin = () => {
+    const email = process.env.REACT_APP_GUEST_USER_EMAIL;
+    const password = process.env.REACT_APP_GUEST_USER_PASSWORD;
+
+    dispatch(sellerLogin(email, password));
+  };
+
   return (
     <main className="bg-indigo-600">
       <section className="flex flex-col justify-center  items-center h-screen">
@@ -82,11 +89,21 @@ const LoginPage = () => {
           </form>
         </div>
         <div className="mt-5">
-          <p className="text-center text-white text-xl">
+          <p className="text-center text-white">
             Don't have an account?{" "}
             <Link className="underline" to={routes.signup}>
               Signup
             </Link>
+          </p>
+          <p className="text-center text-white">
+            Login as{" "}
+            <button
+              onClick={() => handleGuestLogin()}
+              className="underline"
+              to={routes.signup}
+            >
+              Guest User
+            </button>
           </p>
         </div>
       </section>
