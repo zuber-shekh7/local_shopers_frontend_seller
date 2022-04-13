@@ -2,8 +2,13 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCategories } from "../../actions/categoriesActions";
+import { Card } from "../../components/cards";
 import Breadcrumb from "../../components/shared/Breadcrumb";
+import HeaderContainer from "../../components/shared/HeaderContainer";
+import { HiOutlinePlus } from "react-icons/hi";
 import routes from "../../utils/routes";
+import { Loader } from "../../components/loaders";
+import { Error } from "../../components/messages";
 
 const CategoriesPage = () => {
   const { loading, categories, error } = useSelector(
@@ -17,67 +22,77 @@ const CategoriesPage = () => {
   }, [dispatch]);
 
   return (
-    <main className="container">
-      <section>
+    <main>
+      <HeaderContainer>
+        <h1>Manage Categories</h1>
+      </HeaderContainer>
+      <section className="container">
         {/* breadcrumb */}
         <Breadcrumb
           links={[
             {
-              name: "your account",
+              name: "home",
               to: routes.dashboard,
             },
             {
-              name: "manage categories",
-              to: routes.getCategories,
+              name: "categories",
+              to: "",
             },
           ]}
         />
-        <div>
-          <div className="flex justify-between items-center mb-3">
-            <h1>Manage Categories</h1>
-            <Link
-              className="bg-indigo-600 text-white text-lg rounded-lg px-3 py-2 hover:bg-indigo-700"
-              to={routes.createCategory}
-            >
-              Add category
-            </Link>
-          </div>
-        </div>
-        <hr />
-        <div>
-          {categories && categories.length && categories.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              {categories.map((category) => {
-                return (
-                  <Link
-                    to={`${routes.getCategories}/${category._id}`}
-                    key={category._id}
-                    className="card border-0"
+        {loading && <Loader />}
+        {error && <Error />}
+        {categories && categories.length && categories.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <Card className="hover:bg-indigo-50 rounded-lg border overflow-hidden">
+              <Link
+                className="flex justify-center items-center md:h-full h-48"
+                to={routes.createCategory}
+              >
+                <h2 className="flex justify-center items-center space-x-5">
+                  <HiOutlinePlus /> Add Category
+                </h2>
+              </Link>
+            </Card>
+            {categories.map((category) => {
+              return (
+                <Link
+                  to={`${routes.getCategories}/${category._id}`}
+                  key={category._id}
+                  className="card border-0"
+                >
+                  <div
+                    className="flex justify-center h-64 w-full rounded-lg hover:opacity-90 hover:text-indigo-700 transition duration-500"
+                    style={{
+                      backgroundImage: `url(${category.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
                   >
-                    <div
-                      className="flex justify-center h-64 w-full rounded-lg hover:opacity-90 hover:text-indigo-700 transition duration-500"
-                      style={{
-                        backgroundImage: `url(${category.image})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    >
-                      <div className="flex justify-center items-center">
-                        <h2 className="text-indigo-600 px-3 py-2 bg-white rounded-lg">
-                          {category.name}
-                        </h2>
-                      </div>
+                    <div className="flex justify-center items-center">
+                      <h2 className="text-indigo-600 px-3 py-2 bg-white rounded-lg">
+                        {category.name}
+                      </h2>
                     </div>
-                  </Link>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="flex justify-center">
-              <h3 className="text-2xl text-center">No categories available</h3>
-            </div>
-          )}
-        </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="grid grid-cols-3">
+            <Card className="hover:bg-indigo-50 rounded-lg border overflow-hidden">
+              <Link
+                className="flex justify-center items-center h-48"
+                to={routes.createCategory}
+              >
+                <h2 className="flex justify-center items-center space-x-5">
+                  <HiOutlinePlus /> Add Category
+                </h2>
+              </Link>
+            </Card>
+          </div>
+        )}
       </section>
     </main>
   );
