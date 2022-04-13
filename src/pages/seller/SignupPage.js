@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { HiOutlineShoppingBag } from "react-icons/hi";
 import { sellerSignup } from "../../actions/sellerActions";
 import routes from "../../utils/routes";
+import { Logo } from "../../components/logos";
+import { FormGroup } from "../../components/forms/containers";
+import { Label, Input } from "../../components/forms/inputs";
+import { Button } from "../../components/buttons";
+import { Error } from "../../components/messages";
+import { Loader } from "../../components/loaders";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +17,8 @@ const SignupPage = () => {
 
   const [message, setMessage] = useState("");
 
-  const { loading, seller, error } = useSelector((state) => state.sellerLogin);
+  const { seller } = useSelector((state) => state.sellerLogin);
+  const { loading, error } = useSelector((state) => state.sellerSignup);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,20 +47,14 @@ const SignupPage = () => {
   return (
     <main className="bg-indigo-600">
       <section className="flex flex-col justify-center  items-center h-screen">
-        <div className="w-11/12 sm:w-96 bg-white rounded-xl shadow-lg p-10">
-          <Link to="/">
-            <h2 className="flex gap-x-1 text-3xl text-indigo-600">
-              <HiOutlineShoppingBag className="h-8 w-8" />
-              <span className="font-bold ">Local Shoppers</span>
-            </h2>
-          </Link>
-
+        <div className="w-11/12 sm:w-96 bg-white rounded-xl shadow-lg px-10 py-5">
+          <Logo />
           <h1 className="my-4">Signup</h1>
           <form onSubmit={handleSubmit}>
-            <div className="mb-5">
-              <label htmlFor="email">Email</label>
-              <input
-                className="w-full text-lg py-2 px-2 rounded-lg border-2 border-indigo-600  focus:ring-indigo-600"
+            <FormGroup>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                className="w-full"
                 type="email"
                 id="email"
                 value={email}
@@ -62,11 +62,11 @@ const SignupPage = () => {
                 placeholder="seller@example.com"
                 required
               />
-            </div>
-            <div className="mb-5">
-              <label htmlFor="password">Password</label>
-              <input
-                className="w-full text-lg py-2 px-2 rounded-lg border-2 border-indigo-600  focus:ring-indigo-600"
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                className="w-full"
                 type="password"
                 id="password"
                 value={password}
@@ -74,37 +74,33 @@ const SignupPage = () => {
                 placeholder="don't share your password"
                 required
               />
-            </div>
-            <div className="mb-5">
-              <label htmlFor="password">Confirm Password</label>
-              <input
-                className="w-full text-lg py-2 px-2 rounded-lg border-2 border-indigo-600  focus:ring-indigo-600"
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Input
+                className="w-full"
                 type="password"
-                id="password"
+                id="confirmPassword"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="confirm password"
                 required
               />
-            </div>
-            <div className="mb-5">
-              <button
-                className="btn text-lg bg-indigo-600 w-full border hover:bg-indigo-700"
-                type="submit"
-              >
+            </FormGroup>
+            <FormGroup>
+              <Button className="w-full" type="submit">
                 Signup
-              </button>
-            </div>
-
-            <div className="mb-5 text-center">
-              {!loading && error && <p className="text-red-500">{error}</p>}
-              {!loading && message && <p className="text-red-500">{message}</p>}
-              {loading && <p>Loading...</p>}
-            </div>
+              </Button>
+            </FormGroup>
+            <FormGroup className="flex justify-center mb-0">
+              {loading && <Loader />}
+              {error && <Error>{error}</Error>}
+              {message && <Error>{message}</Error>}
+            </FormGroup>
           </form>
         </div>
         <div className="mt-5">
-          <p className="text-center text-white text-xl">
+          <p className="text-center text-white">
             Already have an account?{" "}
             <Link className="underline" to={routes.login}>
               Login

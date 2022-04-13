@@ -13,6 +13,7 @@ import {
   SELLER_SIGNUP_REQUEST,
   SELLER_SIGNUP_SUCCESS,
 } from "../constants/seller";
+import { extractError } from "../utils/helper";
 
 const sellerLogin = (email, password) => async (dispatch) => {
   try {
@@ -30,7 +31,7 @@ const sellerLogin = (email, password) => async (dispatch) => {
 
     dispatch({ type: SELLER_LOGIN_SUCCESS, payload: seller });
   } catch (err) {
-    const error = err.response ? err.response.data.message : err.message;
+    const error = extractError(err);
     dispatch({ type: SELLER_LOGIN_FAIL, payload: error });
   }
 };
@@ -48,7 +49,7 @@ const sellerSignup = (email, password) => async (dispatch) => {
 
     dispatch({ type: SELLER_SIGNUP_SUCCESS, payload: data });
   } catch (err) {
-    const error = err.response ? err.response.data.message : err.message;
+    const error = extractError(err);
     dispatch({ type: SELLER_SIGNUP_FAIL, payload: error });
   }
 };
@@ -61,7 +62,7 @@ const sellerLogout = () => async (dispatch) => {
 
     dispatch({ type: SELLER_LOGOUT_SUCCESS, payload: null });
   } catch (err) {
-    const error = err.response ? err.response.data.message : err.message;
+    const error = extractError(err);
     dispatch({ type: SELLER_LOGOUT_FAIL, payload: error });
   }
 };
@@ -82,7 +83,7 @@ const getSeller = (id) => async (dispatch) => {
 
     dispatch({ type: GET_SELLER_SUCCESS, payload: seller });
   } catch (err) {
-    const error = err.response ? err.response.data.message : err.message;
+    const error = extractError(err);
     dispatch({ type: GET_SELLER_FAIL, payload: error });
   }
 };
