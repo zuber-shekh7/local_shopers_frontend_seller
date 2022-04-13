@@ -6,9 +6,12 @@ import {
   HiOutlineFolderOpen,
   HiOutlineHome,
   HiOutlineTruck,
+  HiOutlineUserCircle,
 } from "react-icons/hi";
 import { getSeller } from "../../actions/sellerActions";
 import routes from "../../utils/routes";
+import HeaderContainer from "../../components/shared/HeaderContainer";
+import { Card } from "../../components/cards";
 
 const DashboardPage = () => {
   const {
@@ -24,17 +27,23 @@ const DashboardPage = () => {
   }, [_id, dispatch]);
 
   return (
-    <main className="container">
-      <section>
-        <h1>Your Account</h1>
-        <hr />
+    <main>
+      <HeaderContainer>
+        <div>
+          <h6>
+            Hi {seller ? seller.firstName + " " + seller.lastName : "Seller"},
+          </h6>
+          <h1 className="">Welcome to Local Shoppers</h1>
+        </div>
+      </HeaderContainer>
+      <section className="container">
         {error && <p className="text-center text-red-500">{error}</p>}
         {seller && (
           <>
             {seller.business ? (
               <>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-2">
-                  <div className="px-3 py-4 border-2 rounded-lg span-col-1 mb-3 hover:bg-gray-100">
+                  <Card className="hover:bg-indigo-100 transition duration-500">
                     <Link
                       className="flex space-x-2"
                       to={`${routes.getBusiness}/${seller.business._id}`}
@@ -43,52 +52,50 @@ const DashboardPage = () => {
                         <HiOutlineHome className="h-8 w-8" />
                       </div>
                       <div>
-                        <h2>Manage Business</h2>
-                        <h6 className="text-gray-600">
-                          Create, Edit, and Delete your categories
-                        </h6>
+                        <h4 className="text-2xl font-medium">
+                          Manage Business
+                        </h4>
+                        <h6>Create, Edit, and Delete your categories</h6>
                       </div>
                     </Link>
-                  </div>
-                  <div className="px-3 py-4 border-2 rounded-lg span-col-1 mb-3 hover:bg-gray-100">
+                  </Card>
+                  <Card className="hover:bg-indigo-100 transition duration-500">
                     <Link className="flex space-x-2" to={routes.getOrders}>
                       <div>
                         <HiOutlineTruck className="h-8 w-8" />
                       </div>
                       <div>
-                        <h2>Manage Orders</h2>
-                        <h6 className="text-gray-600">
-                          Create, Edit, and Delete your categories
-                        </h6>
+                        <h4 className="text-2xl font-medium">Manage Orders</h4>
+                        <h6>Create, Edit, and Delete your categories</h6>
                       </div>
                     </Link>
-                  </div>
-                  <div className="px-3 py-4 border-2 rounded-lg span-col-1 mb-3 hover:bg-gray-100">
+                  </Card>
+                  <Card className="hover:bg-indigo-100 transition duration-500">
                     <Link className="flex space-x-2" to={routes.getCategories}>
                       <div>
                         <HiOutlineFolderOpen className="h-8 w-8" />
                       </div>
                       <div>
-                        <h2>Manage Categories</h2>
-                        <h6 className="text-gray-600">
-                          Create, Edit, and Delete your categories
-                        </h6>
+                        <h4 className="text-2xl font-medium">
+                          Manage Categories
+                        </h4>
+                        <h6>Create, Edit, and Delete your categories</h6>
                       </div>
                     </Link>
-                  </div>
-                  <div className="px-3 py-4 border-2 rounded-lg span-col-1 mb-3 hover:bg-gray-100">
+                  </Card>
+                  <Card className="hover:bg-indigo-100 transition duration-500">
                     <Link className="flex space-x-2" to={routes.getCategories}>
                       <div>
-                        <HiOutlineFolderOpen className="h-8 w-8" />
+                        <HiOutlineUserCircle className="h-8 w-8" />
                       </div>
                       <div>
-                        <h2>Manage Products</h2>
+                        <h4 className="text-2xl font-medium">Your Profile</h4>
                         <h6 className="text-gray-600">
                           Create, Edit, and Delete your categories
                         </h6>
                       </div>
                     </Link>
-                  </div>
+                  </Card>
                 </div>
               </>
             ) : (
