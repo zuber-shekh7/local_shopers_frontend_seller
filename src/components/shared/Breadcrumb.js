@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { HiChevronRight } from "react-icons/hi";
 
-const Breadcrumb = ({ links }) => {
+const Breadcrumb = ({ links, className }) => {
   return (
-    <div className="flex mb-5">
+    <div className={`flex mb-5 ${className}`}>
       {links.map((link, index) => {
         return (
           <Link

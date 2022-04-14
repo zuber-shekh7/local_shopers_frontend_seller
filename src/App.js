@@ -13,6 +13,12 @@ import HomePage from "./pages/core/HomePage";
 import NotFoundPage from "./pages/core/NotFoundPage";
 import OrderPage from "./pages/orders/OrderPage";
 import OrdersPage from "./pages/orders/OrdersPage";
+import {
+  AddProductPage,
+  EditProductPage,
+  ProductPage,
+  ProductsPage,
+} from "./pages/products";
 import DashboardPage from "./pages/seller/DashboardPage";
 import LoginPage from "./pages/seller/LoginPage";
 import SignupPage from "./pages/seller/SignupPage";
@@ -81,6 +87,38 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <EditCategoryPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={`${routes.getCategories}/:categoryId/products`}
+            element={
+              <ProtectedRoute>
+                <ProductsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={`${routes.getCategories}/:categoryId/products/add`}
+            element={
+              <ProtectedRoute>
+                <AddProductPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={`${routes.getCategories}/:categoryId/products/:productId`}
+            element={
+              <ProtectedRoute>
+                <ProductPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={`${routes.getCategories}/:categoryId/products/:productId/edit`}
+            element={
+              <ProtectedRoute>
+                <EditProductPage />
               </ProtectedRoute>
             }
           />

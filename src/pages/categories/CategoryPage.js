@@ -88,6 +88,14 @@ const CategoryPage = () => {
                   <p>Created : {moment(category.createdAt).fromNow()}</p>
                   <p>Last Modified : {moment(category.updatedAt).fromNow()}</p>
                 </div>
+                <div className="flex justify-center mb-5">
+                  <LinkButton
+                    className="flex w-full justify-center items-center space-x-2"
+                    to={`${routes.getCategories}/${category._id}/products`}
+                  >
+                    <span>Expore Products</span>
+                  </LinkButton>
+                </div>
                 <div className="flex justify-evenly space-x-2">
                   <LinkButton
                     className="flex w-full justify-center items-center space-x-2"

@@ -10,6 +10,12 @@ import {
 } from "./categoriesReducers";
 import { getOrderReducer, getOrdersReducer } from "./orderReducers";
 import {
+  createProductReducer,
+  editProductReducer,
+  getProductReducer,
+  getProductsReducer,
+} from "./productReducers";
+import {
   getSellerReducer,
   sellerLoginReducer,
   sellerSignupReducer,
@@ -45,6 +51,10 @@ const initialState = {
   deleteCategory: { success: null },
   getOrders: { orders: null },
   getOrder: { order: null },
+  getProducts: { products: null },
+  getProduct: { product: null },
+  createProduct: { product: null },
+  editProduct: { product: null },
 };
 
 const rootReducer = combineReducers({
@@ -61,6 +71,10 @@ const rootReducer = combineReducers({
   deleteCategory: deleteCategoryReducer,
   getOrders: getOrdersReducer,
   getOrder: getOrderReducer,
+  getProducts: getProductsReducer,
+  getProduct: getProductReducer,
+  createProduct: createProductReducer,
+  editProduct: editProductReducer,
 });
 
 export default rootReducer;

@@ -5,7 +5,7 @@ const CircleLink = ({ to, children, className, ...rest }) => {
   return (
     <Link
       to={to}
-      className={`bg-white text-indigo-600 p-2 rounded-full ${className}`}
+      className={`p-2 rounded-full hover:bg-indigo-700 ${className}`}
       {...rest}
     >
       {children}
