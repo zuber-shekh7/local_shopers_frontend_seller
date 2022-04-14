@@ -23,6 +23,7 @@ export const createProduct = (formData) => async (dispatch) => {
     const { product } = data;
 
     dispatch({ type: CREATE_PRODUCT_SUCCESS, payload: product });
+    dispatch({ type: CREATE_PRODUCT_SUCCESS, payload: null });
   } catch (err) {
     const error = err.response ? err.response.data.message : err.message;
     dispatch({ type: CREATE_PRODUCT_FAIL, payload: error });

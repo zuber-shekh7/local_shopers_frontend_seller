@@ -78,7 +78,7 @@ const CategoryPage = () => {
             <Card className="flex flex-1 flex-col card border shadow-lg">
               <img
                 className="w-full h-64 rounded-lg object-cover mb-5"
-                src={category.image}
+                src={category.photo.url}
                 alt={category.name}
               />
 

@@ -17,6 +17,7 @@ import {
   GET_CATEGORY_REQUEST,
   GET_CATEGORY_SUCCESS,
 } from "../constants/categories";
+import { extractError } from "../utils/helper";
 
 const getCategories = (id) => async (dispatch) => {
   try {
@@ -86,24 +87,18 @@ const editCategory = (formData, categoryId) => async (dispatch) => {
   try {
     dispatch({ type: EDIT_CATEGORY_REQUEST });
 
-    const token = JSON.parse(localStorage.getItem("token"));
-
     const { data } = await backendAPI.put(
       `/categories/${categoryId}`,
-      formData,
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
+      formData
     );
+
     const { category } = data;
 
     dispatch({ type: EDIT_CATEGORY_SUCCESS, payload: category });
 
     dispatch({ type: EDIT_CATEGORY_SUCCESS, payload: null });
   } catch (err) {
-    const error = err.response ? err.response.data.message : err.message;
+    const error = extractError(err);
     dispatch({ type: EDIT_CATEGORY_FAIL, payload: error });
   }
 };

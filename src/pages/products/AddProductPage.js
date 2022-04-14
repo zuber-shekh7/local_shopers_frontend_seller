@@ -47,7 +47,11 @@ const AddProductPage = () => {
   };
 
   if (product) {
-    return <Navigate to={`${routes.getCategories}/products/${product._id}`} />;
+    return (
+      <Navigate
+        to={`${routes.getCategories}/${categoryId}/products/${product._id}`}
+      />
+    );
   }
 
   return (

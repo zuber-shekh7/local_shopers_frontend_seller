@@ -17,7 +17,7 @@ import { Error } from "../../components/messages";
 const EditCategoryPage = () => {
   const [name, setName] = useState("");
 
-  const [image, setImage] = useState(null);
+  const [photo, setPhoto] = useState(null);
 
   const { loading, category, error } = useSelector(
     (state) => state.getCategory
@@ -45,18 +45,18 @@ const EditCategoryPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name && !image) {
+    if (!name && !photo) {
       return;
     }
 
-    if (name === category.name && !image) {
+    if (name === category.name && !photo) {
       return navigate(`${routes.getCategories}/${categoryId}`);
     }
 
     const formData = new FormData();
 
     formData.append("name", name);
-    formData.append("image", image);
+    formData.append("photo", photo);
 
     dispatch(editCategory(formData, categoryId));
   };
@@ -111,12 +111,12 @@ const EditCategoryPage = () => {
               </FormGroup>
 
               <FormGroup>
-                <Label htmlFor="image">Image</Label>
+                <Label htmlFor="photo">Photo</Label>
                 <Input
-                  id="image"
+                  id="photo"
                   className="w-full"
                   type="file"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  onChange={(e) => setPhoto(e.target.files[0])}
                   placeholder="Upload image"
                   accept="image/jpeg"
                 />

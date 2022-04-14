@@ -62,9 +62,9 @@ const CategoriesPage = () => {
                   className="card border-0"
                 >
                   <div
-                    className="flex justify-center h-64 w-full rounded-lg hover:opacity-90 hover:text-indigo-700 transition duration-500"
+                    className="flex justify-center h-64 w-full rounded-lg hover:opacity-90 hover:text-indigo-700 transition duration-500 shadow-lg"
                     style={{
-                      backgroundImage: `url(${category.image})`,
+                      backgroundImage: `url(${category.photo.url})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}

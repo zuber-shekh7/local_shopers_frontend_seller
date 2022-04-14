@@ -14,7 +14,7 @@ import { Error } from "../../components/messages";
 
 const CreateCategoryPage = () => {
   const [name, setName] = useState("");
-  const [image, setImage] = useState(null);
+  const [photo, setPhoto] = useState(null);
 
   const { loading, category, error } = useSelector(
     (state) => state.createCategory
@@ -25,14 +25,14 @@ const CreateCategoryPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name && !image) {
+    if (!name && !photo) {
       return;
     }
 
     const formData = new FormData();
 
     formData.append("name", name);
-    formData.append("image", image);
+    formData.append("photo", photo);
 
     dispatch(createCategory(formData));
   };
@@ -82,13 +82,13 @@ const CreateCategoryPage = () => {
                 />
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="image">Image</Label>
+                <Label htmlFor="photo">Photo</Label>
                 <Input
-                  id="image"
+                  id="photo"
                   className="w-full"
                   type="file"
-                  onChange={(e) => setImage(e.target.files[0])}
-                  placeholder="Upload image"
+                  onChange={(e) => setPhoto(e.target.files[0])}
+                  placeholder="Upload photo"
                   accept="image/jpeg"
                   required
                 />
