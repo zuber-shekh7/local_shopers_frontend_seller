@@ -28,124 +28,131 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route element={<DefaultContainer />}>
-          <Route path="/" element={<HomePage />} exact />
-          <Route
-            exact
-            path="/seller/account"
-            element={
-              <ProtectedRoute>
-                <DashboardPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path={routes.createBusiness}
-            element={
-              <ProtectedRoute>
-                <CreateBusinessPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={`${routes.getBusiness}/:businessId`}
-            element={
-              <ProtectedRoute>
-                <BusinessPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={routes.getCategories}
-            exact
-            element={
-              <ProtectedRoute>
-                <CategoriesPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={routes.createCategory}
-            exact
-            element={
-              <ProtectedRoute>
-                <CreateCategoryPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={`${routes.getCategories}/:category_id`}
-            element={
-              <ProtectedRoute>
-                <CategoryPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={`${routes.getCategories}/:categoryId/edit`}
-            element={
-              <ProtectedRoute>
-                <EditCategoryPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={`${routes.getCategories}/:categoryId/products`}
-            element={
-              <ProtectedRoute>
-                <ProductsPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={`${routes.getCategories}/:categoryId/products/add`}
-            element={
-              <ProtectedRoute>
-                <AddProductPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={`${routes.getCategories}/:categoryId/products/:productId`}
-            element={
-              <ProtectedRoute>
-                <ProductPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={`${routes.getCategories}/:categoryId/products/:productId/edit`}
-            element={
-              <ProtectedRoute>
-                <EditProductPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={routes.getOrders}
-            exact
-            element={
-              <ProtectedRoute>
-                <OrdersPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={`${routes.getOrders}/:order_id`}
-            element={
-              <ProtectedRoute>
-                <OrderPage />
-              </ProtectedRoute>
-            }
-          />
-          {/* not found */}
-          <Route path="*" element={<NotFoundPage />} />
+        {/* core */}
+        <Route path="/">
+          <Route element={<DefaultContainer />}>
+            <Route path="/" element={<HomePage />} exact />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+          <Route path="/" element={<LoginContainer />}>
+            <Route path="login" exact element={<LoginPage />} />
+            <Route path="signup" element={<SignupPage />} exact />
+          </Route>
         </Route>
-
-        <Route element={<LoginContainer />}>
-          <Route path="/login" exact element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} exact />
+        {/* seller */}
+        <Route path="/seller">
+          <Route element={<DefaultContainer />}>
+            <Route
+              exact
+              path="dashboard"
+              element={
+                <ProtectedRoute>
+                  <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="business/new"
+              element={
+                <ProtectedRoute>
+                  <CreateBusinessPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="business/:businessId"
+              element={
+                <ProtectedRoute>
+                  <BusinessPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="business/:businessId/categories"
+              exact
+              element={
+                <ProtectedRoute>
+                  <CategoriesPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="business/:businessId/categories/new"
+              exact
+              element={
+                <ProtectedRoute>
+                  <CreateCategoryPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="business/:businessId/categories/:categoryId"
+              element={
+                <ProtectedRoute>
+                  <CategoryPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="business/:businessId/categories/:categoryId/edit"
+              element={
+                <ProtectedRoute>
+                  <EditCategoryPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="business/:businessId/categories/:categoryId/products"
+              element={
+                <ProtectedRoute>
+                  <ProductsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="business/:businessId/categories/:categoryId/products/new"
+              element={
+                <ProtectedRoute>
+                  <AddProductPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="business/:businessId/categories/:categoryId/products/:productId"
+              element={
+                <ProtectedRoute>
+                  <ProductPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="business/:businessId/categories/:categoryId/products/:productId/edit"
+              element={
+                <ProtectedRoute>
+                  <EditProductPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="business/:businessId/orders"
+              exact
+              element={
+                <ProtectedRoute>
+                  <OrdersPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="business/:businessId/orders/:orderId"
+              element={
+                <ProtectedRoute>
+                  <OrderPage />
+                </ProtectedRoute>
+              }
+            />
+            {/* not found */}
+          </Route>
         </Route>
       </Routes>
     </Router>
