@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOrders } from "../../actions/orderActions";
+import { Card } from "../../components/cards";
 import Breadcrumb from "../../components/shared/Breadcrumb";
+import HeaderContainer from "../../components/shared/HeaderContainer";
 import routes from "../../utils/routes";
 
 const OrdersPage = () => {
@@ -20,21 +22,23 @@ const OrdersPage = () => {
 
   return (
     <main>
+      <HeaderContainer>
+        <h1>Manage Orders</h1>
+      </HeaderContainer>
       <section className="container">
         <Breadcrumb
           links={[
             {
-              name: "your account",
+              name: "home",
               to: routes.dashboard,
             },
             {
-              name: "your orders",
-              to: routes.getOrders,
+              name: "orders",
+              to: "",
             },
           ]}
         />
-        <h1>Your Orders</h1>
-        <hr />
+
         {error && !loading && (
           <p className="text-center text-red-500">
             Something went wrong. Please try after sometime .
@@ -68,19 +72,20 @@ const OrdersPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-3  gap-3">
                 {orders.map((order) => {
                   return (
-                    <Link
-                      key={order._id}
-                      to={`${routes.getOrders}/${order._id}`}
-                      className="bg-gray-50 border-2 rounded-lg px-4 py-4 shadow-lg hover:bg-gray-100"
-                    >
-                      <p className="text-sm uppercase font-semibold">
-                        ORDER | {order._id}
-                      </p>
-                      <hr />
-                      <h4>Customer: {order.shippingAddress.fullName}</h4>
-                      <h4>Price: ₹ {order.totalPrice}/-</h4>
-                      <h4>Status: {order.status}</h4>
-                    </Link>
+                    <Card className="shadow-lg hover:bg-indigo-600 hover:text-white transition duration-300">
+                      <Link
+                        key={order._id}
+                        to={`${routes.getOrders}/${order._id}`}
+                      >
+                        <p className="text-sm uppercase font-semibold">
+                          ORDER | {order._id}
+                        </p>
+                        <hr />
+                        <h4>Customer: {order.shippingAddress.fullName}</h4>
+                        <h4>Price: ₹ {order.totalPrice}/-</h4>
+                        <h4>Status: {order.status}</h4>
+                      </Link>
+                    </Card>
                   );
                 })}
               </div>

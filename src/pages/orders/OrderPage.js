@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getOrder } from "../../actions/orderActions";
+import { Card } from "../../components/cards";
+import { Error } from "../../components/messages";
 import Breadcrumb from "../../components/shared/Breadcrumb";
+import HeaderContainer from "../../components/shared/HeaderContainer";
 import routes from "../../utils/routes";
 
 const OrderPage = () => {
@@ -18,25 +21,27 @@ const OrderPage = () => {
 
   return (
     <main>
-      <div className="container">
+      <HeaderContainer>
+        <h1>Order Summary</h1>
+      </HeaderContainer>
+      <section className="container">
         <Breadcrumb
           links={[
             {
-              name: "your account",
+              name: "home",
               to: routes.dashboard,
             },
             {
-              name: "your orders",
+              name: "orders",
               to: routes.getOrders,
             },
             {
-              name: "order details",
-              to: order ? `${routes.getOrders}/${order._id}` : routes.getOrders,
+              name: order ? order._id : "summary",
+              to: "",
             },
           ]}
         />
-        <h1>Order Details</h1>
-        <hr />
+
         {loading && !order && (
           <div className="bg-gray-50 border-2 rounded-lg px-4 py-4 shadow-lg hover:bg-gray-100">
             <div className="animate-pulse grid grid-cols-12">
@@ -92,8 +97,9 @@ const OrderPage = () => {
             </div>
           </div>
         )}
+        {error && <Error />}
         {order && (
-          <div className="bg-gray-50 border rounded-xl px-4 py-3 shadow-md hover:bg-gray-100">
+          <Card className="shadow-lg">
             <div className="grid grid-cols-12">
               <div className="col-span-12 md:col-span-6 sm:px-2">
                 <h2 className="text-sm md:text-3xl uppercase">
@@ -156,9 +162,9 @@ const OrderPage = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </Card>
         )}
-      </div>
+      </section>
     </main>
   );
 };
