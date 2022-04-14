@@ -9,6 +9,7 @@ import { HiOutlinePlus } from "react-icons/hi";
 import routes from "../../utils/routes";
 import { Loader } from "../../components/loaders";
 import { Error } from "../../components/messages";
+import { CircleLink } from "../../components/buttons";
 
 const CategoriesPage = () => {
   const { loading, categories, error } = useSelector(
@@ -28,32 +29,31 @@ const CategoriesPage = () => {
       </HeaderContainer>
       <section className="container">
         {/* breadcrumb */}
-        <Breadcrumb
-          links={[
-            {
-              name: "home",
-              to: routes.dashboard,
-            },
-            {
-              name: "categories",
-              to: "",
-            },
-          ]}
-        />
+        <div className="flex justify-between items-center mb-5">
+          <Breadcrumb
+            className="mb-0"
+            links={[
+              {
+                name: "home",
+                to: routes.dashboard,
+              },
+              {
+                name: "categories",
+                to: "",
+              },
+            ]}
+          />
+          <CircleLink
+            className="flex justify-center items-center space-x-2 bg-indigo-600 text-white"
+            to={`${routes.getCategories}/new`}
+          >
+            <HiOutlinePlus />
+          </CircleLink>
+        </div>
         {loading && <Loader />}
         {error && <Error />}
         {categories && categories.length && categories.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <Card className="hover:bg-indigo-50 rounded-lg border overflow-hidden">
-              <Link
-                className="flex justify-center items-center md:h-full h-48"
-                to={routes.createCategory}
-              >
-                <h2 className="flex justify-center items-center space-x-5">
-                  <HiOutlinePlus /> Add Category
-                </h2>
-              </Link>
-            </Card>
             {categories.map((category) => {
               return (
                 <Link
