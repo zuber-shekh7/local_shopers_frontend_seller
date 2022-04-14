@@ -112,7 +112,7 @@ const BusinessPage = () => {
                             <div
                               className="grid h-64 grid-cols-1 rounded-lg mb-3 overflow-hidden shadow-md hover:opacity-90 hover:text-indigo-700 transition duration-500"
                               style={{
-                                backgroundImage: `url(${category.image})`,
+                                backgroundImage: `url(${category.photo.url})`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                               }}
