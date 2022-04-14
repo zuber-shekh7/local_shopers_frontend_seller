@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
-import { HiOutlineArrowSmLeft } from "react-icons/hi";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import FormData from "form-data";
 import routes from "../../utils/routes";
 import { editCategory, getCategory } from "../../actions/categoriesActions";
 import { useEffect } from "react";
 import Breadcrumb from "../../components/shared/Breadcrumb";
+import HeaderContainer from "../../components/shared/HeaderContainer";
+import { Card } from "../../components/cards";
+import { FormGroup } from "../../components/forms/containers";
+import { Input, Label } from "../../components/forms/inputs";
+import { Button } from "../../components/buttons";
+import { Loader } from "../../components/loaders";
+import { Error } from "../../components/messages";
 
 const EditCategoryPage = () => {
   const [name, setName] = useState("");
@@ -60,13 +66,16 @@ const EditCategoryPage = () => {
   }
 
   return (
-    <main className="container max-w-xl">
-      <section>
+    <main>
+      <HeaderContainer>
+        <h1>Edit Category</h1>
+      </HeaderContainer>
+      <section className="container max-w-xl">
         {/* breadcrumb */}
         <Breadcrumb
           links={[
             {
-              name: "your account",
+              name: "home",
               to: routes.dashboard,
             },
             {
@@ -74,7 +83,7 @@ const EditCategoryPage = () => {
               to: routes.getCategories,
             },
             {
-              name: "Category",
+              name: category ? category.name : "Category",
               to: `${routes.getCategories}/${categoryId}`,
             },
             {
@@ -83,59 +92,47 @@ const EditCategoryPage = () => {
             },
           ]}
         />
-        <div className="flex justify-center form border-0 shadow-lg">
+        <Card className="flex justify-center form border shadow-lg px-5">
           <div className="flex-1">
-            <div className="bg-indigo-600 py-2">
-              <h1 className="text-center text-white">Edit category</h1>
-            </div>
-            <form className="p-5" onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label className="block" htmlFor="name">
+            <form onSubmit={handleSubmit}>
+              <FormGroup>
+                <Label className="block" htmlFor="name">
                   Name
-                </label>
-                <input
+                </Label>
+                <Input
                   id="name"
-                  className="text-lg w-full py-2 px-2 border-2 rounded-lg border-gray"
+                  className="w-full"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="iPhones"
                   required
                 />
-              </div>
+              </FormGroup>
 
-              <div className="mb-3">
-                <label htmlFor="image">Image</label>
-                <input
+              <FormGroup>
+                <Label htmlFor="image">Image</Label>
+                <Input
                   id="image"
-                  className="w-full file:text-sm file:border-0 file:px-4 file:py-2 file:mt-3 file:rounded-full file:text-indigo-500 file:bg-violet-50 file:font-semibold hover:file:bg-violet-100"
+                  className="w-full"
                   type="file"
                   onChange={(e) => setImage(e.target.files[0])}
                   placeholder="Upload image"
                   accept="image/jpeg"
                 />
-              </div>
-              <div className="mb-3">
-                <button
-                  className="w-full bg-indigo-600 text-white rounded-lg px-3 py-2 mb-3 hover:bg-indigo-700"
-                  type="submit"
-                >
+              </FormGroup>
+              <FormGroup>
+                <Button className="w-full" type="submit">
                   Save
-                </button>
-              </div>
-              <div className="mb-3">
-                {(updateError || error) && (
-                  <p className="text-center text-red-500">
-                    {error || updateError}
-                  </p>
-                )}
-                {(updateLoading || loading) && (
-                  <p className="text-center">Loading...</p>
-                )}
-              </div>
+                </Button>
+              </FormGroup>
+              <FormGroup className="flex justify-center mb-0">
+                {(updateError || error) && <Error />}
+                {(updateLoading || loading) && <Loader />}
+              </FormGroup>
             </form>
           </div>
-        </div>
+        </Card>
       </section>
     </main>
   );
