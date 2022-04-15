@@ -5,11 +5,12 @@ import { Link, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { getBusiness } from "../../actions/businessActions";
 import routes, { generateRoute } from "../../utils/routes";
-import { HiShare } from "react-icons/hi";
+import { HiOutlinePencil, HiOutlineShare } from "react-icons/hi";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 import HeaderContainer from "../../components/shared/HeaderContainer";
 import { Error } from "../../components/messages";
 import { Loader } from "../../components/loaders";
+import { Button, LinkButton } from "../../components/buttons";
 
 const BusinessPage = () => {
   const { businessId } = useParams();
@@ -44,40 +45,49 @@ const BusinessPage = () => {
           draggable={false}
           theme="colored"
         />
-        {/* breadcrumb */}
-        <Breadcrumb
-          links={[
-            {
-              name: "home",
-              to: routes.dashboard,
-            },
-            {
-              name: "business",
-              to: "",
-            },
-          ]}
-        />
+        <div className="flex justify-between items-center mb-5">
+          {/* breadcrumb */}
+          <Breadcrumb
+            className="mb-0"
+            links={[
+              {
+                name: "home",
+                to: routes.dashboard,
+              },
+              {
+                name: "business",
+                to: "",
+              },
+            ]}
+          />
+
+          <div className="flex justify-end gap-x-2">
+            {business && (
+              <>
+                <Button
+                  onClick={copyToClipboard}
+                  className="flex justify-center items-center gap-x-2"
+                >
+                  <HiOutlineShare />
+                  <span className="hidden md:block">Share</span>
+                </Button>
+                <LinkButton
+                  to={generateRoute(routes.editBusiness, {
+                    ":businessId": businessId,
+                  })}
+                  className="flex justify-center items-center gap-x-2"
+                >
+                  <HiOutlinePencil />
+                  <span className="hidden md:block">Edit</span>
+                </LinkButton>
+              </>
+            )}
+          </div>
+        </div>
         {error && <Error />}
         {loading && <Loader />}
         {business && (
           <div className="w-full mx-auto">
-            <div className="flex justify-end mb-5 gap-x-2">
-              <button
-                onClick={copyToClipboard}
-                className="flex justify-center items-center gap-x-2 px-3 py-1 text-lg bg-indigo-700 text-white rounded-md hover:bg-indigo-800"
-              >
-                <HiShare />
-                <span>Share</span>
-              </button>
-              <Link
-                to={generateRoute(routes.editBusiness, {
-                  ":businessId": businessId,
-                })}
-                className="px-3 py-1 text-lg bg-indigo-700 text-white rounded-md hover:bg-indigo-800"
-              >
-                <span>Edit</span>
-              </Link>
-            </div>
             <div className="mb-5">
               <img
                 className="h-96 w-full object-cover object-center rounded-lg shadow-sm"
