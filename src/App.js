@@ -165,7 +165,7 @@ const App = () => {
               }
             />
             <Route
-              path={routes.get}
+              path={routes.getOrders}
               exact
               element={
                 <ProtectedRoute>

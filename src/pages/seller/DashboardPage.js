@@ -81,7 +81,12 @@ const DashboardPage = () => {
                     </Link>
                   </Card>
                   <Card className="hover:bg-indigo-100 transition duration-500">
-                    <Link className="flex space-x-2" to={routes.getOrders}>
+                    <Link
+                      className="flex space-x-2"
+                      to={generateRoute(routes.getOrders, {
+                        ":businessId": seller.business._id,
+                      })}
+                    >
                       <div>
                         <HiOutlineTruck className="h-8 w-8" />
                       </div>
