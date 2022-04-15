@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getCategories } from "../../actions/categoriesActions";
-import { Card } from "../../components/cards";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 import HeaderContainer from "../../components/shared/HeaderContainer";
 import { HiOutlinePlus } from "react-icons/hi";

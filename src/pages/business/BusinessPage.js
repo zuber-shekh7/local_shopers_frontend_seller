@@ -145,8 +145,8 @@ const BusinessPage = () => {
                       })}
                     </div>
                   ) : (
-                    <div>
-                      <h4>No Categories available</h4>
+                    <div className="flex justify-center">
+                      <h4>No categories added yet</h4>
                     </div>
                   )}
                 </>
