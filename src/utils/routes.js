@@ -12,7 +12,7 @@ const routes = {
   business: "/business",
   editBusiness: "/business/:businessId/edit",
   getBusiness: "/business/:businessId",
-  createBusiness: "/sellers/business/new",
+  createBusiness: "/business/new",
   createCategory: "/business/:businessId/categories/new",
   getCategories: "/business/:businessId/categories",
   getCategory: "/business/:businessId/categories/:categoryId",
