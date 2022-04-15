@@ -25,7 +25,7 @@ const BusinessPage = () => {
   }, [businessId, dispatch]);
 
   const copyToClipboard = async () => {
-    const onlineStoreLink = `${window.location.origin}/business/${businessId}`;
+    const onlineStoreLink = `${process.env.REACT_APP_FRONTEND_SERVER}/business/${businessId}`;
     await clipboard.write(onlineStoreLink);
     toast.success("Linked copied successfully.");
   };
