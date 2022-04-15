@@ -81,7 +81,7 @@ const BusinessPage = () => {
             <div className="mb-5">
               <img
                 className="h-96 w-full object-cover object-center rounded-lg shadow-sm"
-                src={business.image}
+                src={business.photo.url}
                 alt={business.name}
               />
             </div>

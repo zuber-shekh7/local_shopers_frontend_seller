@@ -4,6 +4,7 @@ import DefaultContainer from "./components/shared/containers/DefaultContainer";
 import LoginContainer from "./components/shared/containers/LoginContainer";
 import ProtectedRoute from "./components/shared/Routes/ProtectedRoute";
 import BusinessPage from "./pages/business/BusinessPage";
+import EditBusinessPage from "./pages/business/EditBusinessPage";
 import CreateBusinessPage from "./pages/business/CreateBusinessPage";
 import CategoriesPage from "./pages/categories/CategoriesPage";
 import CategoryPage from "./pages/categories/CategoryPage";
@@ -86,6 +87,14 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <BusinessPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={routes.editBusiness}
+              element={
+                <ProtectedRoute>
+                  <EditBusinessPage />
                 </ProtectedRoute>
               }
             />
