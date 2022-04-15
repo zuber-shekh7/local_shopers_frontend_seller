@@ -1,6 +1,10 @@
 const routes = {
   home: "/",
   about: "/about",
+  contact: "/contact",
+  faqs: "/FAQs",
+  privacy: "/privacy-policy",
+  terms: "/terms-of-service",
   signup: "/signup",
   login: "/login",
   dashboard: "/seller/dashboard",

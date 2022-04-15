@@ -9,8 +9,13 @@ import CategoriesPage from "./pages/categories/CategoriesPage";
 import CategoryPage from "./pages/categories/CategoryPage";
 import CreateCategoryPage from "./pages/categories/CreateCategoryPage";
 import EditCategoryPage from "./pages/categories/EditCategoryPage";
+import AboutUsPage from "./pages/core/AboutUsPage";
+import ContactUsPage from "./pages/core/ContactUsPage";
+import FAQPage from "./pages/core/FAQPage";
 import HomePage from "./pages/core/HomePage";
 import NotFoundPage from "./pages/core/NotFoundPage";
+import PrivacyPolicyPage from "./pages/core/PrivacyPolicyPage";
+import TermsOfServicePage from "./pages/core/TermsOfServicePage";
 import OrderPage from "./pages/orders/OrderPage";
 import OrdersPage from "./pages/orders/OrdersPage";
 import {
@@ -32,6 +37,15 @@ const App = () => {
         <Route path="/">
           <Route element={<DefaultContainer />}>
             <Route path="/" element={<HomePage />} exact />
+            <Route path={routes.about} element={<AboutUsPage />} exact />
+            <Route path={routes.contact} element={<ContactUsPage />} exact />
+            <Route path={routes.faqs} element={<FAQPage />} exact />
+            <Route path={routes.terms} element={<TermsOfServicePage />} exact />
+            <Route
+              path={routes.privacy}
+              element={<PrivacyPolicyPage />}
+              exact
+            />
             {/* not found */}
             <Route path="*" element={<NotFoundPage />} />
           </Route>
