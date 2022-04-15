@@ -28,7 +28,10 @@ import {
 import DashboardPage from "./pages/seller/DashboardPage";
 import LoginPage from "./pages/seller/LoginPage";
 import SignupPage from "./pages/seller/SignupPage";
+import AccountContainer from "./components/shared/containers/AccountContainer";
 import routes from "./utils/routes";
+import ProfilePage from "./pages/seller/ProfilePage";
+import SettingsPage from "./pages/seller/SettingsPage";
 
 const App = () => {
   return (
@@ -67,6 +70,26 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+            <Route element={<AccountContainer />}>
+              <Route
+                exact
+                path={routes.profile}
+                element={
+                  <ProtectedRoute>
+                    <ProfilePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                exact
+                path={routes.settings}
+                element={
+                  <ProtectedRoute>
+                    <SettingsPage />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
           </Route>
         </Route>
         {/* business */}

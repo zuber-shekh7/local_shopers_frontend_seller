@@ -52,17 +52,6 @@ const DashboardPage = () => {
               <>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-2">
                   <Card className="hover:bg-indigo-100 transition duration-500">
-                    <Link className="flex space-x-2" to={routes.getCategories}>
-                      <div>
-                        <HiOutlineUserCircle className="h-8 w-8" />
-                      </div>
-                      <div>
-                        <h4 className="text-2xl font-medium">Your Profile</h4>
-                        <h6>Edit email, mobile, name etc...</h6>
-                      </div>
-                    </Link>
-                  </Card>
-                  <Card className="hover:bg-indigo-100 transition duration-500">
                     <Link
                       className="flex space-x-2"
                       to={generateRoute(routes.getBusiness, {
@@ -111,6 +100,17 @@ const DashboardPage = () => {
                           Manage Categories
                         </h4>
                         <h6>Create, Edit, and Delete your categories</h6>
+                      </div>
+                    </Link>
+                  </Card>
+                  <Card className="hover:bg-indigo-100 transition duration-500">
+                    <Link className="flex space-x-2" to={routes.profile}>
+                      <div>
+                        <HiOutlineUserCircle className="h-8 w-8" />
+                      </div>
+                      <div>
+                        <h4 className="text-2xl font-medium">Manage Profile</h4>
+                        <h6>Edit email, mobile, name etc...</h6>
                       </div>
                     </Link>
                   </Card>

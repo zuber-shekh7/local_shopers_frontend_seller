@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import Breadcrumb from "../../components/shared/Breadcrumb";
-import routes from "../../utils/routes";
 import { HiOutlineUser, HiOutlineCog } from "react-icons/hi";
+import routes from "../../../utils/routes";
+import Breadcrumb from "../Breadcrumb";
 
 const AccountContainer = () => {
   return (
@@ -21,7 +21,7 @@ const AccountContainer = () => {
             },
             {
               name: "account",
-              to: routes.dashboard,
+              to: routes.profile,
             },
           ]}
         />
