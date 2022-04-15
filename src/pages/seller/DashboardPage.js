@@ -14,6 +14,7 @@ import HeaderContainer from "../../components/shared/HeaderContainer";
 import { Card } from "../../components/cards";
 import { Loader } from "../../components/loaders";
 import { Error } from "../../components/messages";
+import { LinkButton } from "../../components/buttons";
 
 const DashboardPage = () => {
   const {
@@ -33,7 +34,11 @@ const DashboardPage = () => {
       <HeaderContainer>
         <div>
           <h6>
-            Hi {seller ? seller.firstName + " " + seller.lastName : "Seller"},
+            Hi{" "}
+            {seller && seller.firstName
+              ? seller.firstName + " " + seller.lastName
+              : "Seller"}
+            ,
           </h6>
           <h1 className="">Welcome to Local Shoppers</h1>
         </div>
@@ -108,22 +113,18 @@ const DashboardPage = () => {
               </>
             ) : (
               <>
-                <div className="bg-indigo-500 p-10 rounded-xl shadow-lg text-white">
-                  <h1 className="text-4xl font-bold mb-3">
-                    Welcome {seller.firstName}
-                  </h1>
-                  <h2 className="text-3xl font-semibold mb-3">
-                    Start your online business now
-                  </h2>
+                <div className="bg-indigo-600 text-white p-10 rounded-lg shadow-lg">
+                  <h1>Welcome {seller.firstName}</h1>
+                  <h2>Start your online business now</h2>
                   <p className="mb-5">
                     Create your online business within 10 minutes
                   </p>
-                  <Link
-                    className="text-lg font-semibold px-3 py-3 bg-white text-black rounded-lg"
+                  <LinkButton
+                    className="text-lg font-semibold py-3 bg-white text-black rounded-lg hover:bg-indigo-50"
                     to={routes.createBusiness}
                   >
                     Create your online store
-                  </Link>
+                  </LinkButton>
                 </div>
               </>
             )}
