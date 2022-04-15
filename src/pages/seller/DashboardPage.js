@@ -9,7 +9,7 @@ import {
   HiOutlineUserCircle,
 } from "react-icons/hi";
 import { getSeller } from "../../actions/sellerActions";
-import routes from "../../utils/routes";
+import routes, { generateRoute } from "../../utils/routes";
 import HeaderContainer from "../../components/shared/HeaderContainer";
 import { Card } from "../../components/cards";
 import { Loader } from "../../components/loaders";
@@ -60,7 +60,9 @@ const DashboardPage = () => {
                   <Card className="hover:bg-indigo-100 transition duration-500">
                     <Link
                       className="flex space-x-2"
-                      to={`${routes.getBusiness}/${seller.business._id}`}
+                      to={generateRoute(routes.getBusiness, {
+                        ":businessId": seller.business._id,
+                      })}
                     >
                       <div>
                         <HiOutlineHome className="h-8 w-8" />
@@ -85,7 +87,12 @@ const DashboardPage = () => {
                     </Link>
                   </Card>
                   <Card className="hover:bg-indigo-100 transition duration-500">
-                    <Link className="flex space-x-2" to={routes.getCategories}>
+                    <Link
+                      className="flex space-x-2"
+                      to={generateRoute(routes.getCategories, {
+                        ":businessId": seller.business._id,
+                      })}
+                    >
                       <div>
                         <HiOutlineFolderOpen className="h-8 w-8" />
                       </div>

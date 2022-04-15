@@ -11,7 +11,7 @@ import { Loader } from "../../components/loaders";
 import { Error } from "../../components/messages";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 import HeaderContainer from "../../components/shared/HeaderContainer";
-import routes from "../../utils/routes";
+import routes, { generateRoute } from "../../utils/routes";
 
 const AddProductPage = () => {
   const [name, setName] = useState("");
@@ -24,7 +24,7 @@ const AddProductPage = () => {
     (state) => state.createProduct
   );
 
-  const { categoryId } = useParams();
+  const { businessId, categoryId } = useParams();
 
   const dispatch = useDispatch();
 
@@ -49,7 +49,11 @@ const AddProductPage = () => {
   if (product) {
     return (
       <Navigate
-        to={`${routes.getCategories}/${categoryId}/products/${product._id}`}
+        to={generateRoute(routes.getProduct, {
+          ":businessId": businessId,
+          ":categoryId": categoryId,
+          ":productId": product._id,
+        })}
       />
     );
   }
@@ -65,24 +69,31 @@ const AddProductPage = () => {
           links={[
             {
               name: "home",
-              to: routes.dashboard,
+              to: generateRoute(routes.getBusiness, {
+                ":businessId": businessId,
+              }),
             },
             {
               name: "categories",
-              to: routes.getCategories,
+              to: generateRoute(routes.getCategories, {
+                ":businessId": businessId,
+              }),
             },
             {
               name: "category",
-              to: `${routes.getCategories}/${categoryId}`,
+              to: generateRoute(routes.getCategory, {
+                ":businessId": businessId,
+                ":categoryId": categoryId,
+              }),
             },
             {
               name: "products",
-              to: `${routes.getCategories}/${categoryId}/products`,
+              to: generateRoute(routes.getProducts, {
+                ":businessId": businessId,
+                ":categoryId": categoryId,
+              }),
             },
-            {
-              name: "add",
-              to: "",
-            },
+            { name: "new", to: "" },
           ]}
         />
         {loading && <Loader />}

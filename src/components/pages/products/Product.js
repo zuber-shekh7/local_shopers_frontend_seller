@@ -1,13 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
-import routes from "../../../utils/routes";
+import { useParams } from "react-router-dom";
+import routes, { generateRoute } from "../../../utils/routes";
 import { Button, LinkButton } from "../../buttons";
 import { Card } from "../../cards";
 import Modal from "../../shared/Modal";
 
 const Product = ({ product }) => {
   const [open, setOpen] = useState(false);
+
+  const { businessId, categoryId } = useParams();
 
   const handleDelete = (productId) => {};
   return (
@@ -33,7 +36,11 @@ const Product = ({ product }) => {
       <div className="flex justify-evenly space-x-2">
         <LinkButton
           className="flex w-full justify-center items-center space-x-2"
-          to={`${routes.getCategories}/${product.category._id}/products/${product._id}/edit`}
+          to={generateRoute(routes.editProduct, {
+            ":businessId": businessId,
+            ":categoryId": categoryId,
+            ":productId": product._id,
+          })}
         >
           <HiOutlinePencil />
           <span>Edit</span>

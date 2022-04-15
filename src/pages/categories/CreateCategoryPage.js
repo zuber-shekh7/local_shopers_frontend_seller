@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import FormData from "form-data";
-import routes from "../../utils/routes";
+import routes, { generateRoute } from "../../utils/routes";
 import { createCategory } from "../../actions/categoriesActions";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 import HeaderContainer from "../../components/shared/HeaderContainer";
@@ -21,6 +21,7 @@ const CreateCategoryPage = () => {
   );
 
   const dispatch = useDispatch();
+  const { businessId } = useParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +39,14 @@ const CreateCategoryPage = () => {
   };
 
   if (category) {
-    return <Navigate to={`${routes.getCategories}/${category._id}`} />;
+    return (
+      <Navigate
+        to={generateRoute(routes.getCategories, {
+          ":businessId": businessId,
+          ":categoryId": category._id,
+        })}
+      />
+    );
   }
 
   return (
@@ -52,11 +60,15 @@ const CreateCategoryPage = () => {
           links={[
             {
               name: "home",
-              to: routes.dashboard,
+              to: generateRoute(routes.getBusiness, {
+                ":businessId": businessId,
+              }),
             },
             {
               name: "categories",
-              to: routes.getCategories,
+              to: generateRoute(routes.getCategories, {
+                ":businessId": businessId,
+              }),
             },
             {
               name: "new",

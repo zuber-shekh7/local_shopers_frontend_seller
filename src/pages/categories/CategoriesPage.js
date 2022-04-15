@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getCategories } from "../../actions/categoriesActions";
 import { Card } from "../../components/cards";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 import HeaderContainer from "../../components/shared/HeaderContainer";
 import { HiOutlinePlus } from "react-icons/hi";
-import routes from "../../utils/routes";
+import routes, { generateRoute } from "../../utils/routes";
 import { Loader } from "../../components/loaders";
 import { Error } from "../../components/messages";
 import { CircleLink } from "../../components/buttons";
@@ -15,6 +15,8 @@ const CategoriesPage = () => {
   const { loading, categories, error } = useSelector(
     (state) => state.getCategories
   );
+
+  const { businessId } = useParams();
 
   const dispatch = useDispatch();
 
@@ -35,7 +37,9 @@ const CategoriesPage = () => {
             links={[
               {
                 name: "home",
-                to: routes.dashboard,
+                to: generateRoute(routes.getBusiness, {
+                  ":businessId": businessId,
+                }),
               },
               {
                 name: "categories",
@@ -45,7 +49,9 @@ const CategoriesPage = () => {
           />
           <CircleLink
             className="flex justify-center items-center space-x-2 bg-indigo-600 text-white"
-            to={`${routes.getCategories}/new`}
+            to={generateRoute(routes.createCategory, {
+              ":businessId": businessId,
+            })}
           >
             <HiOutlinePlus />
           </CircleLink>
@@ -57,7 +63,7 @@ const CategoriesPage = () => {
             {categories.map((category) => {
               return (
                 <Link
-                  to={`${routes.getCategories}/${category._id}`}
+                  to={`${routes.business}/${businessId}/categories/${category._id}`}
                   key={category._id}
                   className="card border-0"
                 >

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Navigate } from "react-router-dom";
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import { deleteCategory, getCategory } from "../../actions/categoriesActions";
-import routes from "../../utils/routes";
+import routes, { generateRoute } from "../../utils/routes";
 import Modal from "../../components/shared/Modal";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 import moment from "moment";
@@ -25,11 +25,11 @@ const CategoryPage = () => {
   );
 
   const dispatch = useDispatch();
-  const { category_id } = useParams();
+  const { businessId, categoryId } = useParams();
 
   useEffect(() => {
-    dispatch(getCategory(category_id));
-  }, [dispatch, category_id]);
+    dispatch(getCategory(categoryId));
+  }, [dispatch, categoryId]);
 
   const handleDelete = (id) => {
     dispatch(deleteCategory(id));
@@ -51,14 +51,18 @@ const CategoryPage = () => {
           links={[
             {
               name: "home",
-              to: routes.dashboard,
+              to: generateRoute(routes.getBusiness, {
+                ":businessId": businessId,
+              }),
             },
             {
               name: "categories",
-              to: routes.getCategories,
+              to: generateRoute(routes.getCategories, {
+                ":businessId": businessId,
+              }),
             },
             {
-              name: category ? category.name : "Category",
+              name: category ? category.name : "category",
               to: "",
             },
           ]}
@@ -91,7 +95,10 @@ const CategoryPage = () => {
                 <div className="flex justify-center mb-5">
                   <LinkButton
                     className="flex w-full justify-center items-center space-x-2"
-                    to={`${routes.getCategories}/${category._id}/products`}
+                    to={generateRoute(routes.getProducts, {
+                      ":businessId": businessId,
+                      ":categoryId": categoryId,
+                    })}
                   >
                     <span>Expore Products</span>
                   </LinkButton>
@@ -99,7 +106,10 @@ const CategoryPage = () => {
                 <div className="flex justify-evenly space-x-2">
                   <LinkButton
                     className="flex w-full justify-center items-center space-x-2"
-                    to={`${routes.getCategories}/${category._id}/edit`}
+                    to={generateRoute(routes.editCategory, {
+                      ":businessId": businessId,
+                      ":categoryId": category._id,
+                    })}
                   >
                     <HiOutlinePencil />
                     <span>Edit</span>

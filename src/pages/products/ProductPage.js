@@ -8,10 +8,10 @@ import { Error } from "../../components/messages";
 import { Product } from "../../components/pages/products";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 import HeaderContainer from "../../components/shared/HeaderContainer";
-import routes from "../../utils/routes";
+import routes, { generateRoute } from "../../utils/routes";
 
 const ProductPage = () => {
-  const { categoryId, productId } = useParams();
+  const { businessId, categoryId, productId } = useParams();
 
   const { loading, product, error } = useSelector((state) => state.getProduct);
 
@@ -32,24 +32,31 @@ const ProductPage = () => {
           links={[
             {
               name: "home",
-              to: routes.dashboard,
+              to: generateRoute(routes.getBusiness, {
+                ":businessId": businessId,
+              }),
             },
             {
               name: "categories",
-              to: routes.getCategories,
+              to: generateRoute(routes.getCategories, {
+                ":businessId": businessId,
+              }),
             },
             {
               name: "category",
-              to: `${routes.getCategories}/${categoryId}`,
+              to: generateRoute(routes.getCategory, {
+                ":businessId": businessId,
+                ":categoryId": categoryId,
+              }),
             },
             {
               name: "products",
-              to: `${routes.getCategories}/${categoryId}/products`,
+              to: generateRoute(routes.getProducts, {
+                ":businessId": businessId,
+                ":categoryId": categoryId,
+              }),
             },
-            {
-              name: product ? product.name : "Product",
-              to: "",
-            },
+            { name: product ? product.name : "product", to: "" },
           ]}
         />
         {loading && <Loader />}

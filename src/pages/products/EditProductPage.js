@@ -10,7 +10,7 @@ import { Loader } from "../../components/loaders";
 import { Error } from "../../components/messages";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 import HeaderContainer from "../../components/shared/HeaderContainer";
-import routes from "../../utils/routes";
+import routes, { generateRoute } from "../../utils/routes";
 
 const EditProductPage = () => {
   const [name, setName] = useState("");
@@ -26,7 +26,7 @@ const EditProductPage = () => {
     error: updateError,
   } = useSelector((state) => state.editProduct);
 
-  const { productId, categoryId } = useParams();
+  const { businessId, productId, categoryId } = useParams();
 
   const dispatch = useDispatch();
 
@@ -62,7 +62,11 @@ const EditProductPage = () => {
   if (updatedProduct) {
     return (
       <Navigate
-        to={`${routes.getCategories}/${categoryId}/products/${productId}`}
+        to={generateRoute(routes.getProduct, {
+          ":businessId": businessId,
+          ":categoryId": categoryId,
+          ":productId": productId,
+        })}
       />
     );
   }
@@ -78,28 +82,39 @@ const EditProductPage = () => {
           links={[
             {
               name: "home",
-              to: routes.dashboard,
+              to: generateRoute(routes.getBusiness, {
+                ":businessId": businessId,
+              }),
             },
             {
               name: "categories",
-              to: routes.getCategories,
+              to: generateRoute(routes.getCategories, {
+                ":businessId": businessId,
+              }),
             },
             {
               name: "category",
-              to: `${routes.getCategories}/${categoryId}`,
+              to: generateRoute(routes.getCategory, {
+                ":businessId": businessId,
+                ":categoryId": categoryId,
+              }),
             },
             {
               name: "products",
-              to: `${routes.getCategories}/${categoryId}/products`,
+              to: generateRoute(routes.getProducts, {
+                ":businessId": businessId,
+                ":categoryId": categoryId,
+              }),
             },
             {
-              name: product ? product.name : "Product",
-              to: `${routes.getCategories}/${categoryId}/products/${productId}`,
+              name: product ? product.name : "product",
+              to: generateRoute(routes.getProduct, {
+                ":businessId": businessId,
+                ":categoryId": categoryId,
+                ":productId": productId,
+              }),
             },
-            {
-              name: "edit",
-              to: "",
-            },
+            { name: "edit", to: "" },
           ]}
         />
         {(loading || updateLoading) && <Loader />}

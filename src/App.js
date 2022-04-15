@@ -32,6 +32,7 @@ const App = () => {
         <Route path="/">
           <Route element={<DefaultContainer />}>
             <Route path="/" element={<HomePage />} exact />
+            {/* not found */}
             <Route path="*" element={<NotFoundPage />} />
           </Route>
           <Route path="/" element={<LoginContainer />}>
@@ -51,9 +52,15 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+          </Route>
+        </Route>
+        {/* business */}
+
+        <Route path="/business">
+          <Route element={<DefaultContainer />}>
             <Route
               exact
-              path="business/new"
+              path="new"
               element={
                 <ProtectedRoute>
                   <CreateBusinessPage />
@@ -61,7 +68,7 @@ const App = () => {
               }
             />
             <Route
-              path="business/:businessId"
+              path={routes.getBusiness}
               element={
                 <ProtectedRoute>
                   <BusinessPage />
@@ -69,7 +76,7 @@ const App = () => {
               }
             />
             <Route
-              path="business/:businessId/categories"
+              path={routes.getCategories}
               exact
               element={
                 <ProtectedRoute>
@@ -78,7 +85,7 @@ const App = () => {
               }
             />
             <Route
-              path="business/:businessId/categories/new"
+              path={routes.createCategory}
               exact
               element={
                 <ProtectedRoute>
@@ -87,7 +94,7 @@ const App = () => {
               }
             />
             <Route
-              path="business/:businessId/categories/:categoryId"
+              path={routes.getCategory}
               element={
                 <ProtectedRoute>
                   <CategoryPage />
@@ -95,7 +102,7 @@ const App = () => {
               }
             />
             <Route
-              path="business/:businessId/categories/:categoryId/edit"
+              path={routes.editCategory}
               element={
                 <ProtectedRoute>
                   <EditCategoryPage />
@@ -103,7 +110,7 @@ const App = () => {
               }
             />
             <Route
-              path="business/:businessId/categories/:categoryId/products"
+              path={routes.getProducts}
               element={
                 <ProtectedRoute>
                   <ProductsPage />
@@ -111,7 +118,7 @@ const App = () => {
               }
             />
             <Route
-              path="business/:businessId/categories/:categoryId/products/new"
+              path={routes.createProduct}
               element={
                 <ProtectedRoute>
                   <AddProductPage />
@@ -119,7 +126,7 @@ const App = () => {
               }
             />
             <Route
-              path="business/:businessId/categories/:categoryId/products/:productId"
+              path={routes.getProduct}
               element={
                 <ProtectedRoute>
                   <ProductPage />
@@ -127,7 +134,7 @@ const App = () => {
               }
             />
             <Route
-              path="business/:businessId/categories/:categoryId/products/:productId/edit"
+              path={routes.editProduct}
               element={
                 <ProtectedRoute>
                   <EditProductPage />
@@ -135,7 +142,7 @@ const App = () => {
               }
             />
             <Route
-              path="business/:businessId/orders"
+              path={routes.get}
               exact
               element={
                 <ProtectedRoute>
@@ -144,14 +151,13 @@ const App = () => {
               }
             />
             <Route
-              path="business/:businessId/orders/:orderId"
+              path=":businessId/orders/:orderId"
               element={
                 <ProtectedRoute>
                   <OrderPage />
                 </ProtectedRoute>
               }
             />
-            {/* not found */}
           </Route>
         </Route>
       </Routes>

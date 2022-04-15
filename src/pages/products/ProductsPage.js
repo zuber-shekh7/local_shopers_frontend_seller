@@ -10,10 +10,10 @@ import { Error } from "../../components/messages";
 import { ProductList } from "../../components/pages/products";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 import HeaderContainer from "../../components/shared/HeaderContainer";
-import routes from "../../utils/routes";
+import routes, { generateRoute } from "../../utils/routes";
 
 const ProductsPage = () => {
-  const { categoryId } = useParams();
+  const { businessId, categoryId } = useParams();
 
   const { loading, products, error } = useSelector(
     (state) => state.getProducts
@@ -37,25 +37,32 @@ const ProductsPage = () => {
             links={[
               {
                 name: "home",
-                to: routes.dashboard,
+                to: generateRoute(routes.getBusiness, {
+                  ":businessId": businessId,
+                }),
               },
               {
                 name: "categories",
-                to: routes.getCategories,
+                to: generateRoute(routes.getCategories, {
+                  ":businessId": businessId,
+                }),
               },
               {
                 name: "category",
-                to: `${routes.getCategories}/${categoryId}`,
+                to: generateRoute(routes.getCategory, {
+                  ":businessId": businessId,
+                  ":categoryId": categoryId,
+                }),
               },
-              {
-                name: "products",
-                to: "",
-              },
+              { name: "products", to: "" },
             ]}
           />
           <CircleLink
             className="flex justify-center items-center space-x-2 bg-indigo-600 text-white"
-            to={`${routes.getCategories}/${categoryId}/products/add`}
+            to={generateRoute(routes.createProduct, {
+              ":businessId": businessId,
+              ":categoryId": categoryId,
+            })}
           >
             <HiOutlinePlus />
           </CircleLink>

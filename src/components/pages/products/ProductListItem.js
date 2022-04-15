@@ -1,11 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import routes from "../../../utils/routes";
+import routes, { generateRoute } from "../../../utils/routes";
 import { LinkButton } from "../../buttons";
 import { Card } from "../../cards";
 
 const ProductListItem = ({ product }) => {
-  const { categoryId } = useParams();
+  const { businessId, categoryId } = useParams();
 
   return (
     <Card className="border shadow-lg">
@@ -18,7 +18,11 @@ const ProductListItem = ({ product }) => {
         <h2>{product.name}</h2>
         <p>{product.description}</p>
         <LinkButton
-          to={`${routes.getCategories}/${categoryId}/products/${product._id}`}
+          to={generateRoute(routes.getProduct, {
+            ":businessId": businessId,
+            ":categoryId": categoryId,
+            ":productId": product._id,
+          })}
         >
           View More
         </LinkButton>

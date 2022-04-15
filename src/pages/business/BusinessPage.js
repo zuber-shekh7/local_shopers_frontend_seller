@@ -4,7 +4,7 @@ import clipboard from "clipboardy";
 import { Link, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { getBusiness } from "../../actions/businessActions";
-import routes from "../../utils/routes";
+import routes, { generateRoute } from "../../utils/routes";
 import { HiShare } from "react-icons/hi";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 import HeaderContainer from "../../components/shared/HeaderContainer";
@@ -52,7 +52,7 @@ const BusinessPage = () => {
               to: routes.dashboard,
             },
             {
-              name: "manage business",
+              name: "business",
               to: "",
             },
           ]}
@@ -70,7 +70,9 @@ const BusinessPage = () => {
                 <span>Share</span>
               </button>
               <Link
-                to={`${routes.getBusiness}/${business._id}/edit`}
+                to={generateRoute(routes.editBusiness, {
+                  ":businessId": businessId,
+                })}
                 className="px-3 py-1 text-lg bg-indigo-700 text-white rounded-md hover:bg-indigo-800"
               >
                 <span>Edit</span>
@@ -92,7 +94,9 @@ const BusinessPage = () => {
               <div className="flex justify-between items-center">
                 <h2>Categories</h2>
                 <Link
-                  to={routes.getCategories}
+                  to={generateRoute(routes.getCategories, {
+                    ":businessId": businessId,
+                  })}
                   className="px-3 py-1 text-lg bg-indigo-700 text-white rounded-md hover:bg-indigo-800"
                 >
                   <span>Explore</span>
@@ -107,7 +111,10 @@ const BusinessPage = () => {
                         return (
                           <Link
                             key={category._id}
-                            to={`/business/${business._id}/categories/${category._id}`}
+                            to={generateRoute(routes.getCategory, {
+                              ":businessId": businessId,
+                              ":categoryId": category._id,
+                            })}
                           >
                             <div
                               className="grid h-64 grid-cols-1 rounded-lg mb-3 overflow-hidden shadow-md hover:opacity-90 hover:text-indigo-700 transition duration-500"

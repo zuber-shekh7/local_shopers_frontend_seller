@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import FormData from "form-data";
-import routes from "../../utils/routes";
+import routes, { generateRoute } from "../../utils/routes";
 import { editCategory, getCategory } from "../../actions/categoriesActions";
 import { useEffect } from "react";
 import Breadcrumb from "../../components/shared/Breadcrumb";
@@ -30,7 +30,7 @@ const EditCategoryPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { categoryId } = useParams();
+  const { businessId, categoryId } = useParams();
 
   useEffect(() => {
     dispatch(getCategory(categoryId));
@@ -62,7 +62,14 @@ const EditCategoryPage = () => {
   };
 
   if (updatedCategory) {
-    return <Navigate to={`${routes.getCategories}/${category._id}`} />;
+    return (
+      <Navigate
+        to={generateRoute(routes.getCategory, {
+          ":businessId": businessId,
+          ":categoryId": categoryId,
+        })}
+      />
+    );
   }
 
   return (
@@ -76,18 +83,25 @@ const EditCategoryPage = () => {
           links={[
             {
               name: "home",
-              to: routes.dashboard,
+              to: generateRoute(routes.getBusiness, {
+                ":businessId": businessId,
+              }),
             },
             {
               name: "categories",
-              to: routes.getCategories,
+              to: generateRoute(routes.getCategories, {
+                ":businessId": businessId,
+              }),
             },
             {
-              name: category ? category.name : "Category",
-              to: `${routes.getCategories}/${categoryId}`,
+              name: category ? category.name : "category",
+              to: generateRoute(routes.getCategory, {
+                ":businessId": businessId,
+                ":categoryId": categoryId,
+              }),
             },
             {
-              name: "Edit",
+              name: "edit",
               to: "",
             },
           ]}
