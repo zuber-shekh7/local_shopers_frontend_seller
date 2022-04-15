@@ -1,5 +1,8 @@
 import backendAPI from "../apis/backendAPI";
 import {
+  EDIT_SELLER_FAIL,
+  EDIT_SELLER_REQUEST,
+  EDIT_SELLER_SUCCESS,
   GET_SELLER_FAIL,
   GET_SELLER_REQUEST,
   GET_SELLER_SUCCESS,
@@ -15,7 +18,7 @@ import {
 } from "../constants/seller";
 import { extractError } from "../utils/helper";
 
-const sellerLogin = (email, password) => async (dispatch) => {
+export const sellerLogin = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: SELLER_LOGIN_REQUEST });
 
@@ -36,7 +39,7 @@ const sellerLogin = (email, password) => async (dispatch) => {
   }
 };
 
-const sellerSignup = (email, password) => async (dispatch) => {
+export const sellerSignup = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: SELLER_SIGNUP_REQUEST });
 
@@ -54,7 +57,7 @@ const sellerSignup = (email, password) => async (dispatch) => {
   }
 };
 
-const sellerLogout = () => async (dispatch) => {
+export const sellerLogout = () => async (dispatch) => {
   try {
     dispatch({ type: SELLER_LOGOUT_REQUEST });
 
@@ -67,7 +70,7 @@ const sellerLogout = () => async (dispatch) => {
   }
 };
 
-const getSeller = (id) => async (dispatch) => {
+export const getSeller = (id) => async (dispatch) => {
   try {
     dispatch({ type: GET_SELLER_REQUEST });
 
@@ -88,4 +91,18 @@ const getSeller = (id) => async (dispatch) => {
   }
 };
 
-export { sellerLogin, sellerSignup, sellerLogout, getSeller };
+export const editSeller = (formData, id) => async (dispatch) => {
+  try {
+    dispatch({ type: EDIT_SELLER_REQUEST });
+
+    const { data } = await backendAPI.put(`/sellers/${id}`, formData);
+
+    const { seller } = data;
+
+    dispatch({ type: EDIT_SELLER_SUCCESS, payload: seller });
+    dispatch({ type: EDIT_SELLER_SUCCESS, payload: null });
+  } catch (err) {
+    const error = extractError(err);
+    dispatch({ type: EDIT_SELLER_FAIL, payload: error });
+  }
+};

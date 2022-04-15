@@ -20,6 +20,7 @@ import {
   getProductsReducer,
 } from "./productReducers";
 import {
+  editSellerReducer,
   getSellerReducer,
   sellerLoginReducer,
   sellerSignupReducer,
@@ -45,6 +46,9 @@ const initialState = {
   getSeller: {
     seller: null,
   },
+  editSeller: {
+    seller: null,
+  },
   getBusinessCategories: { categories: null },
   createBusiness: { business: null },
   getBusiness: { business: null },
@@ -66,6 +70,7 @@ const rootReducer = combineReducers({
   sellerLogin: sellerLoginReducer,
   sellerSignup: sellerSignupReducer,
   getSeller: getSellerReducer,
+  editSeller: editSellerReducer,
   getBusinessCategories: getBusinessCategoriesReducer,
   createBusiness: createBusinessReducer,
   getBusiness: getBusinessReducer,

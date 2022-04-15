@@ -32,6 +32,7 @@ import AccountContainer from "./components/shared/containers/AccountContainer";
 import routes from "./utils/routes";
 import ProfilePage from "./pages/seller/ProfilePage";
 import SettingsPage from "./pages/seller/SettingsPage";
+import EditProfilePage from "./pages/seller/EditProfilePage";
 
 const App = () => {
   return (
@@ -77,6 +78,15 @@ const App = () => {
                 element={
                   <ProtectedRoute>
                     <ProfilePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                exact
+                path={routes.editProfile}
+                element={
+                  <ProtectedRoute>
+                    <EditProfilePage />
                   </ProtectedRoute>
                 }
               />

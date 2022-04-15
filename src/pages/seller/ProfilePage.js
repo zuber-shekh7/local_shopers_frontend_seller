@@ -28,7 +28,9 @@ const ProfilePage = () => {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex space-x-5">
                       <h4 className="font-light">First Name</h4>
-                      <h4 className="font-normal">{seller.firstName}</h4>
+                      <h4 className="font-normal">
+                        {seller.profile.firstName}
+                      </h4>
                     </div>
                     <div>
                       <Link to={routes.editProfile}>
@@ -41,7 +43,7 @@ const ProfilePage = () => {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex space-x-5">
                       <h4 className="font-light">Last Name</h4>
-                      <h4 className="font-normal">{seller.lastName}</h4>
+                      <h4 className="font-normal">{seller.profile.lastName}</h4>
                     </div>
                     <div>
                       <Link to={routes.editProfile}>

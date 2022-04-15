@@ -1,4 +1,7 @@
 import {
+  EDIT_SELLER_FAIL,
+  EDIT_SELLER_REQUEST,
+  EDIT_SELLER_SUCCESS,
   GET_SELLER_FAIL,
   GET_SELLER_REQUEST,
   GET_SELLER_SUCCESS,
@@ -13,7 +16,7 @@ import {
   SELLER_SIGNUP_SUCCESS,
 } from "../constants/seller";
 
-const sellerLoginReducer = (state = {}, action) => {
+export const sellerLoginReducer = (state = {}, action) => {
   switch (action.type) {
     case SELLER_LOGIN_REQUEST:
       return { ...state, loading: true };
@@ -32,7 +35,7 @@ const sellerLoginReducer = (state = {}, action) => {
   }
 };
 
-const sellerSignupReducer = (state = {}, action) => {
+export const sellerSignupReducer = (state = {}, action) => {
   switch (action.type) {
     case SELLER_SIGNUP_REQUEST:
       return { ...state, loading: true };
@@ -45,7 +48,7 @@ const sellerSignupReducer = (state = {}, action) => {
   }
 };
 
-const getSellerReducer = (state = {}, action) => {
+export const getSellerReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_SELLER_REQUEST:
       return { ...state, loading: true };
@@ -58,4 +61,15 @@ const getSellerReducer = (state = {}, action) => {
   }
 };
 
-export { sellerLoginReducer, sellerSignupReducer, getSellerReducer };
+export const editSellerReducer = (state = {}, action) => {
+  switch (action.type) {
+    case EDIT_SELLER_REQUEST:
+      return { ...state, loading: true };
+    case EDIT_SELLER_SUCCESS:
+      return { ...state, loading: false, seller: action.payload };
+    case EDIT_SELLER_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
