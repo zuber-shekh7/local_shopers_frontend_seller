@@ -86,17 +86,9 @@ const CategoriesPage = () => {
             })}
           </div>
         ) : (
-          <div className="grid grid-cols-3">
-            <Card className="hover:bg-indigo-50 rounded-lg border overflow-hidden">
-              <Link
-                className="flex justify-center items-center h-48"
-                to={routes.createCategory}
-              >
-                <h2 className="flex justify-center items-center space-x-5">
-                  <HiOutlinePlus /> Add Category
-                </h2>
-              </Link>
-            </Card>
+          <div className="flex flex-col items-center">
+            <h2>No categories added yet</h2>
+            <p>Click on &#43; icon to add category</p>
           </div>
         )}
       </section>
