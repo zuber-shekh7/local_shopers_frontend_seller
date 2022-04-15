@@ -28,6 +28,7 @@ const routes = {
   editProduct:
     "/business/:businessId/categories/:categoryId/products/:productId/edit",
   getOrders: "/business/:businessId/orders",
+  getOrder: "/business/:businessId/orders/:orderId",
 };
 
 export const generateRoute = (str, values) => {
