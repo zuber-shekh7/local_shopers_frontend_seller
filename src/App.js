@@ -33,6 +33,7 @@ import routes from "./utils/routes";
 import ProfilePage from "./pages/seller/ProfilePage";
 import SettingsPage from "./pages/seller/SettingsPage";
 import EditProfilePage from "./pages/seller/EditProfilePage";
+import EditOrderPage from "./pages/orders/EditOrderPage";
 
 const App = () => {
   return (
@@ -211,6 +212,14 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <OrderPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={routes.editOrder}
+              element={
+                <ProtectedRoute>
+                  <EditOrderPage />
                 </ProtectedRoute>
               }
             />

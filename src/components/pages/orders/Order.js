@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { HiOutlinePencil } from "react-icons/hi";
+import { useParams } from "react-router-dom";
+import routes, { generateRoute } from "../../../utils/routes";
+import { LinkButton } from "../../buttons";
 import { Card } from "../../cards";
 
 const Order = ({ order }) => {
+  const { businessId, orderId } = useParams();
+
   return (
     <Card className="shadow-lg">
       <div className="grid grid-cols-12">
@@ -17,6 +23,19 @@ const Order = ({ order }) => {
           <hr />
           <h3>Payment</h3>
           <p>{order.paymentMethod}</p>
+          <hr />
+          <h3>Status</h3>
+          <p>{order.status}</p>
+          <hr />
+          <LinkButton
+            to={generateRoute(routes.editOrder, {
+              ":businessId": businessId,
+              ":orderId": orderId,
+            })}
+            className="flex justify-center items-center space-x-2"
+          >
+            <HiOutlinePencil /> <span>Edit</span>
+          </LinkButton>
         </div>
         <div className="col-span-12 md:col-span-6 sm:border-l sm:px-2">
           <h2>Order Items</h2>

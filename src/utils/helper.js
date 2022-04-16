@@ -5,3 +5,12 @@ export const extractError = (error) => {
     ? error.message
     : error.error;
 };
+
+export const orderStatus = [
+  "Processing",
+  "Received",
+  "Dispatched",
+  "Delivered",
+  "Returned",
+  "Cancelled",
+];
