@@ -10,12 +10,16 @@ import { Loader } from "../../components/loaders";
 import { Error } from "../../components/messages";
 import Breadcrumb from "../../components/shared/Breadcrumb";
 import HeaderContainer from "../../components/shared/HeaderContainer";
+import { units } from "../../utils/helper";
 import routes, { generateRoute } from "../../utils/routes";
 
 const EditProductPage = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(1);
+  const [discountPrice, setDiscountPrice] = useState(0);
+  const [qty, setQty] = useState(0);
+  const [unit, setUnit] = useState("");
   const [stock, setStock] = useState(1);
   const [photo, setPhoto] = useState(null);
 
@@ -35,6 +39,9 @@ const EditProductPage = () => {
       setName(product.name);
       setDescription(product.description);
       setPrice(product.price);
+      setDiscountPrice(product.discountPrice);
+      setQty(product.qty);
+      setUnit(product.unit);
       setStock(product.stock);
     } else {
       dispatch(getProduct(productId));
@@ -44,7 +51,15 @@ const EditProductPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name && !description && !price && !stock) {
+    if (
+      !name &&
+      !description &&
+      !price &&
+      !stock &&
+      !discountPrice &&
+      !qty &&
+      !unit
+    ) {
       return;
     }
 
@@ -53,6 +68,10 @@ const EditProductPage = () => {
     formData.append("name", name);
     formData.append("description", description);
     formData.append("price", price);
+    formData.append("discountPrice", discountPrice);
+    formData.append("discount", calculateDiscount(price, discountPrice));
+    formData.append("qty", qty);
+    formData.append("unit", unit);
     formData.append("stock", stock);
     formData.append("photos", photo);
 
@@ -70,6 +89,11 @@ const EditProductPage = () => {
       />
     );
   }
+
+  const calculateDiscount = (basePrice, discountPrice) => {
+    const discount = 100 - (discountPrice / basePrice) * 100;
+    return discount.toFixed(2);
+  };
 
   return (
     <main>
@@ -146,17 +170,85 @@ const EditProductPage = () => {
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="price">Price</Label>
-              <Input
-                id="price"
-                className="w-full"
-                type="number"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                placeholder="Enter price"
-                min={1}
-                required
-              />
+              <div className="grid grid-cols-12 gap-x-2">
+                <div className="col-span-6">
+                  <Label htmlFor="price">Price</Label>
+                  <Input
+                    id="price"
+                    className="w-full"
+                    type="number"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    placeholder="Enter price"
+                    min={1}
+                    required
+                  />
+                </div>
+                <div className="col-span-6">
+                  <Label htmlFor="discountedPrice">Discounted Price</Label>
+                  <Input
+                    id="discountedPrice"
+                    className="w-full"
+                    type="number"
+                    value={discountPrice}
+                    onChange={(e) => setDiscountPrice(e.target.value)}
+                    placeholder="Enter discount price"
+                    min={1}
+                    required
+                  />
+                </div>
+              </div>
+            </FormGroup>
+            <FormGroup>
+              <div className="flex justify-between">
+                <span>Price: {discountPrice}</span>
+                <span>
+                  Discount: {calculateDiscount(price, discountPrice)} %
+                </span>
+              </div>
+            </FormGroup>
+            <FormGroup>
+              <div className="grid grid-cols-12 gap-x-2">
+                <div className="col-span-6">
+                  <Label htmlFor="qty">Quantity</Label>
+                  <Input
+                    id="qty"
+                    className="w-full"
+                    type="number"
+                    value={qty}
+                    onChange={(e) => setQty(e.target.value)}
+                    placeholder="Enter Quantity"
+                    min={1}
+                    required
+                  />
+                </div>
+                <div className="col-span-6">
+                  <Label htmlFor="unit">Unit</Label>
+                  <select
+                    className="w-full border rounded-lg"
+                    id="unit"
+                    defaultValue={unit}
+                    onChange={(e) => setUnit(e.target.value)}
+                    required
+                  >
+                    <option disabled>Select an unit</option>
+                    {units.map((unit, index) => {
+                      return (
+                        <option key={index} value={unit}>
+                          {unit}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
+            </FormGroup>
+            <FormGroup>
+              <span>
+                {unit && qty && discountPrice
+                  ? `₹ ${discountPrice} - ${qty} ${unit}`
+                  : null}
+              </span>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="stock">Stock</Label>
@@ -185,7 +277,10 @@ const EditProductPage = () => {
             <FormGroup>
               <Button className="w-full">Save</Button>
             </FormGroup>
-            <FormGroup className="flex justify-center mb-0"></FormGroup>
+            <FormGroup className="flex justify-center mb-0">
+              {updateLoading && <Loader />}
+              {updateError && <Error />}
+            </FormGroup>
           </form>
         </Card>
       </section>
