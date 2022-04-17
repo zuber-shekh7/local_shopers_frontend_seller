@@ -14,3 +14,15 @@ export const orderStatus = [
   "Returned",
   "Cancelled",
 ];
+
+export const units = [
+  "piece",
+  "kg",
+  "gm",
+  "hour",
+  "day",
+  "month",
+  "year",
+  "liter",
+  "ml",
+];
