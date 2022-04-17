@@ -26,7 +26,7 @@ const ProductPage = () => {
       <HeaderContainer>
         <h1>{product ? product.name : "Product"}</h1>
       </HeaderContainer>
-      <section className="container max-w-lg">
+      <section className="container">
         {/* breadcrumb */}
         <Breadcrumb
           links={[
