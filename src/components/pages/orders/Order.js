@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { HiOutlinePencil } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import routes, { generateRoute } from "../../../utils/routes";
@@ -53,7 +53,7 @@ const Order = ({ order }) => {
                 >
                   <img
                     className="col-span-2 object-cover rounded-lg"
-                    src={orderItem.image}
+                    src={orderItem.photo}
                     alt={orderItem.name}
                   />
 
